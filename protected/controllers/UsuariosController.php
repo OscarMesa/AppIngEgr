@@ -37,7 +37,7 @@ class UsuariosController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -69,6 +69,7 @@ class UsuariosController extends Controller
 
 		if(isset($_POST['Usuarios']))
 		{
+                       $_POST['Usuarios']['password'] = sha1($_POST['Usuarios']['password']);
 			$model->attributes=$_POST['Usuarios'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
@@ -93,6 +94,7 @@ class UsuariosController extends Controller
 
 		if(isset($_POST['Usuarios']))
 		{
+                        $_POST['Usuarios']['password'] = sha1($_POST['Usuarios']['password']);
 			$model->attributes=$_POST['Usuarios'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));

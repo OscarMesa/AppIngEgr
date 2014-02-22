@@ -45,7 +45,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tipo_egreso'); ?>
-		<?php echo $form->textField($model,'tipo_egreso'); ?>
+		<?php echo $form->dropDownList($model,'tipo_egreso', CHtml::listData(TipoIngresos::model()->findAll(), 'id', 'descripcion'),array('empty'=>'- Seleccione -')); ?>
 		<?php echo $form->error($model,'tipo_egreso'); ?>
 	</div>
 

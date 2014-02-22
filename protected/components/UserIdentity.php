@@ -17,14 +17,20 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
+            $usuarios = Usuarios::model()->findAll();
 		$users=array(
 			// username => password
-			'demo'=>'demo',
-			'admin'=>'admin',
+			'demo'=> sha1('demo'),
+			'admin'=> sha1('admin'),
 		);
+                
+                foreach ($usuarios as $usuario)
+                {
+                    $users[$usuario->username] = $usuario->password;
+                 }
 		if(!isset($users[$this->username]))
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		elseif($users[$this->username]!==$this->password)
+		elseif($users[$this->username]!==sha1 ($this->password))
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else
 			$this->errorCode=self::ERROR_NONE;

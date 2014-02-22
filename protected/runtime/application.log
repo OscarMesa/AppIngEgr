@@ -88,3 +88,122 @@ Stack trace:
 REQUEST_URI=/AppIngEgr/index.php?r=gii/model/index
 HTTP_REFERER=http://localhost/AppIngEgr/index.php?r=gii/model/index
 ---
+2014/02/22 02:48:38 [error] [php] sha1() expects parameter 1 to be string, array given (/var/www/AppIngEgr/protected/controllers/UsuariosController.php:72)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/yii/framework/web/filters/CFilterChain.php(133): UsuariosController->runAction()
+#2 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#4 /var/www/yii/framework/web/filters/CInlineFilter.php(58): UsuariosController->filterAccessControl()
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#6 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(265): UsuariosController->runActionWithFilters()
+#8 /var/www/yii/framework/web/CWebApplication.php(282): UsuariosController->run()
+#9 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/AppIngEgr/index.php(13): CWebApplication->run()
+REQUEST_URI=/AppIngEgr/index.php?r=usuarios/create
+in /var/www/AppIngEgr/protected/controllers/UsuariosController.php (72)
+in /var/www/AppIngEgr/index.php (13)
+2014/02/22 02:58:21 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('usuarios/admin')
+#9 /var/www/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/AppIngEgr/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/AppIngEgr/index.php?r=usuarios/admin
+HTTP_REFERER=http://localhost/AppIngEgr/index.php?r=usuarios/index
+---
+2014/02/22 02:58:22 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('usuarios/admin')
+#9 /var/www/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/AppIngEgr/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/AppIngEgr/index.php?r=usuarios/admin
+HTTP_REFERER=http://localhost/AppIngEgr/index.php?r=usuarios/admin
+---
+2014/02/22 02:59:00 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('usuarios/admin')
+#9 /var/www/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/AppIngEgr/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/AppIngEgr/index.php?r=usuarios/admin
+HTTP_REFERER=http://localhost/AppIngEgr/index.php?r=usuarios/create
+---
+2014/02/22 02:59:01 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('usuarios/admin')
+#9 /var/www/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/AppIngEgr/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/AppIngEgr/index.php?r=usuarios/admin
+HTTP_REFERER=http://localhost/AppIngEgr/index.php?r=usuarios/admin
+---
+2014/02/22 03:16:13 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('egresos/admin')
+#9 /var/www/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/AppIngEgr/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/AppIngEgr/index.php?r=egresos/admin
+HTTP_REFERER=http://localhost/AppIngEgr/index.php?r=egresos/create
+---
+2014/02/22 03:16:14 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('egresos/admin')
+#9 /var/www/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/AppIngEgr/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/AppIngEgr/index.php?r=egresos/admin
+HTTP_REFERER=http://localhost/AppIngEgr/index.php?r=egresos/admin
+---
