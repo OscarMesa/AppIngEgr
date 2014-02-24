@@ -25,11 +25,11 @@
 		<?php echo $form->error($model,'deescripcion'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'fecha_ingreso'); ?>
-		<?php echo $form->textField($model,'fecha_ingreso'); ?>
-		<?php echo $form->error($model,'fecha_ingreso'); ?>
-	</div>
+<!--	<div class="row">
+		<?php //echo $form->labelEx($model,'fecha_ingreso'); ?>
+		<?php //echo $form->textField($model,'fecha_ingreso'); ?>
+		<?php //echo $form->error($model,'fecha_ingreso'); ?>
+	</div>-->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'valor_egresos'); ?>
@@ -37,11 +37,11 @@
 		<?php echo $form->error($model,'valor_egresos'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'usuario_id'); ?>
-		<?php echo $form->textField($model,'usuario_id'); ?>
-		<?php echo $form->error($model,'usuario_id'); ?>
-	</div>
+<!--	<div class="row">
+		<?php //echo $form->labelEx($model,'usuario_id'); ?>
+		<?php //echo $form->textField($model,'usuario_id'); ?>
+		<?php //echo $form->error($model,'usuario_id'); ?>
+	</div>-->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tipo_egreso_id'); ?>		
