@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.1
+-- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 22-02-2014 a las 03:31:51
--- Versión del servidor: 5.5.32
--- Versión de PHP: 5.4.16
+-- Host: localhost:3306
+-- Generation Time: Feb 23, 2014 at 11:23 PM
+-- Server version: 5.5.35
+-- PHP Version: 5.3.10-1ubuntu3.9
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,15 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `bi`
+-- Database: `bi`
 --
-CREATE DATABASE IF NOT EXISTS `bi` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `bi`;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `egresos`
+-- Table structure for table `egresos`
 --
 
 CREATE TABLE IF NOT EXISTS `egresos` (
@@ -39,12 +37,19 @@ CREATE TABLE IF NOT EXISTS `egresos` (
   KEY `usuario_id` (`usuario_id`,`tipo_egreso_id`),
   KEY `usuario_id_2` (`usuario_id`),
   KEY `tipo_egreso_id` (`tipo_egreso_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `egresos`
+--
+
+INSERT INTO `egresos` (`id`, `deescripcion`, `fecha_ingreso`, `valor_egresos`, `usuario_id`, `tipo_egreso_id`) VALUES
+(1, 'prueba', '2014-02-22 05:00:00', 10000, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ingresos`
+-- Table structure for table `ingresos`
 --
 
 CREATE TABLE IF NOT EXISTS `ingresos` (
@@ -62,20 +67,20 @@ CREATE TABLE IF NOT EXISTS `ingresos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipo_egreso`
+-- Table structure for table `tipo_egresos`
 --
 
-CREATE TABLE IF NOT EXISTS `tipo_egreso` (
+CREATE TABLE IF NOT EXISTS `tipo_egresos` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Volcado de datos para la tabla `tipo_egreso`
+-- Dumping data for table `tipo_egresos`
 --
 
-INSERT INTO `tipo_egreso` (`id`, `descripcion`) VALUES
+INSERT INTO `tipo_egresos` (`id`, `descripcion`) VALUES
 (1, 'Alimentacion'),
 (2, 'Transporte'),
 (3, 'Arriendo'),
@@ -84,7 +89,7 @@ INSERT INTO `tipo_egreso` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipo_ingresos`
+-- Table structure for table `tipo_ingresos`
 --
 
 CREATE TABLE IF NOT EXISTS `tipo_ingresos` (
@@ -94,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `tipo_ingresos` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Volcado de datos para la tabla `tipo_ingresos`
+-- Dumping data for table `tipo_ingresos`
 --
 
 INSERT INTO `tipo_ingresos` (`id`, `descripcion`) VALUES
@@ -106,7 +111,7 @@ INSERT INTO `tipo_ingresos` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -115,21 +120,29 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `username` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Restricciones para tablas volcadas
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `username`, `password`) VALUES
+(1, 'oscar', 'oskar', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
+(2, 'julian david giraldo', 'julian', '354106e416911844661e1603d99ecf7d1c318dda');
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `egresos`
+-- Constraints for table `egresos`
 --
 ALTER TABLE `egresos`
-  ADD CONSTRAINT `egresos_ibfk_2` FOREIGN KEY (`tipo_egreso_id`) REFERENCES `tipo_egreso` (`id`),
+  ADD CONSTRAINT `egresos_ibfk_2` FOREIGN KEY (`tipo_egreso_id`) REFERENCES `tipo_egresos` (`id`),
   ADD CONSTRAINT `egresos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
 
 --
--- Filtros para la tabla `ingresos`
+-- Constraints for table `ingresos`
 --
 ALTER TABLE `ingresos`
   ADD CONSTRAINT `ingresos_ibfk_2` FOREIGN KEY (`tipo_egreso`) REFERENCES `tipo_ingresos` (`id`),
