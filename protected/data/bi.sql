@@ -58,10 +58,10 @@ CREATE TABLE IF NOT EXISTS `ingresos` (
   `fecha_ingreso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `valor_ingreso` double NOT NULL,
   `usuario_id` int(5) NOT NULL,
-  `tipo_egreso` int(5) NOT NULL,
+  `tipo_ingreso` int(5) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_id` (`usuario_id`),
-  KEY `tipo_egreso` (`tipo_egreso`)
+  KEY `tipo_egreso` (`tipo_ingreso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -145,7 +145,7 @@ ALTER TABLE `egresos`
 -- Constraints for table `ingresos`
 --
 ALTER TABLE `ingresos`
-  ADD CONSTRAINT `ingresos_ibfk_2` FOREIGN KEY (`tipo_egreso`) REFERENCES `tipo_ingresos` (`id`),
+  ADD CONSTRAINT `ingresos_ibfk_2` FOREIGN KEY (`tipo_ingreso`) REFERENCES `tipo_ingresos` (`id`),
   ADD CONSTRAINT `ingresos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

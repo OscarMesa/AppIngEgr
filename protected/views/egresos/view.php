@@ -3,7 +3,7 @@
 /* @var $model Egresos */
 
 $this->breadcrumbs=array(
-	'Egresoses'=>array('index'),
+	'Egresos'=>array('index'),
 	$model->id,
 );
 
@@ -25,7 +25,13 @@ $this->menu=array(
 		'deescripcion',
 		'fecha_ingreso',
 		'valor_egresos',
-		'usuario_id',
-		'tipo_egreso_id',
+		array(
+                   'name'=>'usuario_id',
+                    'value'=>$model->usuario->nombre,
+                 ),
+                array(
+                   'name'=>'tipo_egreso_id',
+                    'value'=>$model->tipoEgreso->descripcion,
+                 ),
 	),
 )); ?>

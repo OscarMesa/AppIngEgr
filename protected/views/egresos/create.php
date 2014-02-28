@@ -4,12 +4,12 @@
 
 $this->breadcrumbs=array(
 	'Egresoses'=>array('index'),
-	'Create',
+	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'List Egresos', 'url'=>array('index')),
-	array('label'=>'Manage Egresos', 'url'=>array('admin')),
+	array('label'=>'Listar Egresos', 'url'=>array('index')),
+	array('label'=>'Administrar Egresos', 'url'=>array('admin')),
 );
 ?>
 

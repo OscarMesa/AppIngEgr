@@ -33,16 +33,16 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'usuario_id'); ?>
-		<?php echo $form->textField($model,'usuario_id'); ?>
+		<?php echo $form->dropDownList($model,'usuario_id',  CHtml::listData(Usuarios::model()->findAll(),'id','nombre')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'tipo_egreso_id'); ?>
-		<?php echo $form->textField($model,'tipo_egreso_id'); ?>
+                <?php echo $form->dropDownList($model,'tipo_egreso_id',  CHtml::listData(TipoEgresos::model()->findAll(),'id','descripcion')); ?>		
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Buscar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

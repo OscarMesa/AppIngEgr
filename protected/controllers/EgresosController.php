@@ -70,7 +70,7 @@ class EgresosController extends Controller
 		{
 			$model->attributes=$_POST['Egresos'];
                         $model->usuario_id = Yii::app()->user->id;
-                        $model->fecha_ingreso = date('Y-m-d');
+                        $model->fecha_ingreso = date('Y-m-d h-i-s');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

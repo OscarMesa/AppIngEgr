@@ -3,16 +3,16 @@
 /* @var $model Egresos */
 
 $this->breadcrumbs=array(
-	'Egresoses'=>array('index'),
+	'Egresos'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 $this->menu=array(
-	array('label'=>'List Egresos', 'url'=>array('index')),
-	array('label'=>'Create Egresos', 'url'=>array('create')),
-	array('label'=>'View Egresos', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Egresos', 'url'=>array('admin')),
+	array('label'=>'Listar Egresos', 'url'=>array('index')),
+	array('label'=>'Crear Egreso', 'url'=>array('create')),
+	array('label'=>'Visualizar Egreso', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Administrar Egresos', 'url'=>array('admin')),
 );
 ?>
 
