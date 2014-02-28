@@ -37,8 +37,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'tipo_egreso'); ?>
-		<?php echo $form->textField($model,'tipo_egreso'); ?>
+		<?php echo $form->label($model,'tipo_ingreso_id'); ?>
+		<?php echo $form->textField($model,'tipo_ingreso_id'); ?>
 	</div>
 
 	<div class="row buttons">

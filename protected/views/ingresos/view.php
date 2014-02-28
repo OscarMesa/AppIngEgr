@@ -26,6 +26,6 @@ $this->menu=array(
 		'fecha_ingreso',
 		'valor_ingreso',
 		'usuario_id',
-		'tipo_egreso',
+		'tipo_ingreso_id',
 	),
 )); ?>

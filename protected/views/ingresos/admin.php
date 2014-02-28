@@ -50,7 +50,7 @@ o <b>=</b>) al principio de cada uno de los valores de búsqueda para especifica
 		'fecha_ingreso',
 		'valor_ingreso',
 		'usuario_id',
-		'tipo_egreso',
+		'tipo_ingreso_id',
 		array(
 			'class'=>'CButtonColumn',
 		),

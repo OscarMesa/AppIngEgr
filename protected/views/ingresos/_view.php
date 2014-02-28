@@ -25,8 +25,8 @@
 	<?php echo CHtml::encode($data->usuario_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_egreso')); ?>:</b>
-	<?php echo CHtml::encode($data->tipo_egreso); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_ingreso_id')); ?>:</b>
+	<?php echo CHtml::encode($data->tipo_ingreso_id); ?>
 	<br />
 
 
