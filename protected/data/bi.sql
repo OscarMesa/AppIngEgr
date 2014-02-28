@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `egresos`
 --
-
+DROP TABLE IF EXISTS `egresos`;
 CREATE TABLE IF NOT EXISTS `egresos` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `deescripcion` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
@@ -51,17 +51,16 @@ INSERT INTO `egresos` (`id`, `deescripcion`, `fecha_ingreso`, `valor_egresos`, `
 --
 -- Table structure for table `ingresos`
 --
-
+DROP TABLE IF EXISTS `ingresos`;
 CREATE TABLE IF NOT EXISTS `ingresos` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
   `fecha_ingreso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `valor_ingreso` double NOT NULL,
   `usuario_id` int(5) NOT NULL,
-  `tipo_egreso` int(5) NOT NULL,
+  `tipo_ingreso_id` int(5) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `usuario_id` (`usuario_id`),
-  KEY `tipo_egreso` (`tipo_egreso`)
+  KEY `usuario_id` (`usuario_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -69,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `ingresos` (
 --
 -- Table structure for table `tipo_egresos`
 --
-
+DROP TABLE IF EXISTS `tipo_egresos`;
 CREATE TABLE IF NOT EXISTS `tipo_egresos` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -91,7 +90,7 @@ INSERT INTO `tipo_egresos` (`id`, `descripcion`) VALUES
 --
 -- Table structure for table `tipo_ingresos`
 --
-
+DROP TABLE IF EXISTS `tipo_ingresos`;
 CREATE TABLE IF NOT EXISTS `tipo_ingresos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
@@ -113,7 +112,7 @@ INSERT INTO `tipo_ingresos` (`id`, `descripcion`) VALUES
 --
 -- Table structure for table `usuarios`
 --
-
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
@@ -145,7 +144,7 @@ ALTER TABLE `egresos`
 -- Constraints for table `ingresos`
 --
 ALTER TABLE `ingresos`
-  ADD CONSTRAINT `ingresos_ibfk_2` FOREIGN KEY (`tipo_egreso`) REFERENCES `tipo_ingresos` (`id`),
+  ADD CONSTRAINT `ingresos_ibfk_2` FOREIGN KEY (`tipo_ingreso_id`) REFERENCES `tipo_ingresos` (`id`),
   ADD CONSTRAINT `ingresos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

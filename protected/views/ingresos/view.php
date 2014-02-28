@@ -3,20 +3,20 @@
 /* @var $model Ingresos */
 
 $this->breadcrumbs=array(
-	'Ingresoses'=>array('index'),
+	'Ingresos'=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
-	array('label'=>'List Ingresos', 'url'=>array('index')),
-	array('label'=>'Create Ingresos', 'url'=>array('create')),
-	array('label'=>'Update Ingresos', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Ingresos', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Ingresos', 'url'=>array('admin')),
+	array('label'=>'Listar ingresos', 'url'=>array('index')),
+	array('label'=>'Crear ingreso', 'url'=>array('create')),
+	array('label'=>'Actualizar ingreso', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Eliminar ingreso', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Administrar ingresos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Ingresos #<?php echo $model->id; ?></h1>
+<h1>Ver Ingreso #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

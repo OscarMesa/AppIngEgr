@@ -9,7 +9,7 @@
  * @property string $fecha_ingreso
  * @property double $valor_ingreso
  * @property integer $usuario_id
- * @property integer $tipo_egreso
+ * @property integer $tipo_ingreso_id
  *
  * The followings are the available model relations:
  * @property TipoIngresos $tipoEgreso
@@ -33,13 +33,13 @@ class Ingresos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('descripcion, fecha_ingreso, valor_ingreso, usuario_id, tipo_egreso', 'required'),
-			array('usuario_id, tipo_egreso', 'numerical', 'integerOnly'=>true),
+			array('descripcion, fecha_ingreso, valor_ingreso, usuario_id, tipo_ingreso_id', 'required','message'=>'El campo {attribute} es requerido'),
+			array('usuario_id, tipo_ingreso_id', 'numerical', 'integerOnly'=>true),
 			array('valor_ingreso', 'numerical'),
 			array('descripcion', 'length', 'max'=>300),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, descripcion, fecha_ingreso, valor_ingreso, usuario_id, tipo_egreso', 'safe', 'on'=>'search'),
+			array('id, descripcion, fecha_ingreso, valor_ingreso, usuario_id, tipo_ingreso_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,7 +51,7 @@ class Ingresos extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'tipoEgreso' => array(self::BELONGS_TO, 'TipoIngresos', 'tipo_egreso'),
+			'tipoEgreso' => array(self::BELONGS_TO, 'TipoIngresos', 'tipo_ingreso_id'),
 			'usuario' => array(self::BELONGS_TO, 'Usuarios', 'usuario_id'),
 		);
 	}
@@ -67,7 +67,7 @@ class Ingresos extends CActiveRecord
 			'fecha_ingreso' => 'Fecha Ingreso',
 			'valor_ingreso' => 'Valor Ingreso',
 			'usuario_id' => 'Usuario',
-			'tipo_egreso' => 'Tipo Egreso',
+			'tipo_ingreso_id' => 'Tipo Ingreso',
 		);
 	}
 
@@ -94,7 +94,7 @@ class Ingresos extends CActiveRecord
 		$criteria->compare('fecha_ingreso',$this->fecha_ingreso,true);
 		$criteria->compare('valor_ingreso',$this->valor_ingreso);
 		$criteria->compare('usuario_id',$this->usuario_id);
-		$criteria->compare('tipo_egreso',$this->tipo_egreso);
+		$criteria->compare('tipo_ingreso_id',$this->tipo_ingreso_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

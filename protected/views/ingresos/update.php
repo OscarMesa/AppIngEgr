@@ -3,19 +3,19 @@
 /* @var $model Ingresos */
 
 $this->breadcrumbs=array(
-	'Ingresoses'=>array('index'),
+	'Ingresos'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 $this->menu=array(
-	array('label'=>'List Ingresos', 'url'=>array('index')),
-	array('label'=>'Create Ingresos', 'url'=>array('create')),
-	array('label'=>'View Ingresos', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Ingresos', 'url'=>array('admin')),
+	array('label'=>'Listar ingresos', 'url'=>array('index')),
+	array('label'=>'Crear ingresos', 'url'=>array('create')),
+	array('label'=>'Ver ingreso', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Administrar ingresos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Ingresos <?php echo $model->id; ?></h1>
+<h1>Actualizar ingreso <?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
