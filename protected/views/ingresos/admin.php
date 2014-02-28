@@ -51,6 +51,7 @@ o <b>=</b>) al principio de cada uno de los valores de búsqueda para especifica
 		'valor_ingreso',
 		array(
             'name' => 'usuario_id',             			
+            'filter'=>  CHtml::listData(Usuarios::model()->findAll(),'id', 'nombre'),
 			'value' => '$data->usuario->nombre',
             'htmlOptions' => array('width'=>'80px',),
         ),
