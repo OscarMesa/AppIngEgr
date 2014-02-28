@@ -49,8 +49,17 @@ o <b>=</b>) al principio de cada uno de los valores de búsqueda para especifica
 		'descripcion',
 		'fecha_ingreso',
 		'valor_ingreso',
-		'usuario_id',
-		'tipo_ingreso_id',
+		array(
+            'name' => 'usuario_id',             			
+			'value' => '$data->usuario->nombre',
+            'htmlOptions' => array('width'=>'80px',),
+        ),
+		array(
+            'name' => 'tipo_ingreso_id',
+            'filter'=>  CHtml::listData(TipoIngresos::model()->findAll(),'id', 'descripcion'),
+			'value' => '$data->tipoIngreso->descripcion',
+            'htmlOptions' => array('width'=>'80px',),
+        ),
 		array(
 			'class'=>'CButtonColumn',
 		),

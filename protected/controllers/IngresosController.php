@@ -70,6 +70,8 @@ class IngresosController extends Controller
 		if(isset($_POST['Ingresos']))
 		{
 			$model->attributes=$_POST['Ingresos'];
+            $model->fecha_ingreso = date('Y-m-d H:i:s');
+            $model->usuario_id = Yii::app()->user->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -122,6 +124,7 @@ class IngresosController extends Controller
 	 */
 	public function actionIndex()
 	{
+        $this->redirect(array('admin'));
 		$dataProvider=new CActiveDataProvider('Ingresos');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

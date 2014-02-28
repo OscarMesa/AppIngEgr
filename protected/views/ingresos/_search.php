@@ -33,12 +33,12 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'usuario_id'); ?>
-		<?php echo $form->textField($model,'usuario_id'); ?>
+		<?php echo $form->dropDownList($model,'usuario_id', CHtml::listData(Usuarios::model()->findAll(), 'id', 'nombre'),array('empty'=>'- Seleccione -')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'tipo_ingreso_id'); ?>
-		<?php echo $form->textField($model,'tipo_ingreso_id'); ?>
+		<?php echo $form->dropDownList($model,'tipo_ingreso_id', CHtml::listData(TipoIngresos::model()->findAll(), 'id', 'descripcion'),array('empty'=>'- Seleccione -')); ?>
 	</div>
 
 	<div class="row buttons">

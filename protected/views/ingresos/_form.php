@@ -26,21 +26,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'fecha_ingreso'); ?>
-		<?php echo $form->textField($model,'fecha_ingreso'); ?>
-		<?php echo $form->error($model,'fecha_ingreso'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'valor_ingreso'); ?>
 		<?php echo $form->textField($model,'valor_ingreso'); ?>
 		<?php echo $form->error($model,'valor_ingreso'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'usuario_id'); ?>
-		<?php echo $form->textField($model,'usuario_id'); ?>
-		<?php echo $form->error($model,'usuario_id'); ?>
 	</div>
 
 	<div class="row">

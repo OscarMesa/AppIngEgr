@@ -25,7 +25,13 @@ $this->menu=array(
 		'descripcion',
 		'fecha_ingreso',
 		'valor_ingreso',
-		'usuario_id',
-		'tipo_ingreso_id',
+		array(
+            'label' => $model->getAttributeLabel('usuario_id'),            
+			'value' => $model->usuario->nombre,
+        ),
+		array(
+            'label' => $model->getAttributeLabel('tipo_ingreso_id'),            
+			'value' => $model->tipoIngreso->descripcion,
+        ),
 	),
 )); ?>
