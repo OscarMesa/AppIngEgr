@@ -3,16 +3,16 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Ingresoses',
+	'Ingresos',
 );
 
 $this->menu=array(
-	array('label'=>'Create Ingresos', 'url'=>array('create')),
-	array('label'=>'Manage Ingresos', 'url'=>array('admin')),
+	array('label'=>'Crear ingresos', 'url'=>array('create')),
+	array('label'=>'Administrar ingresos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Ingresoses</h1>
+<h1>Ingresos</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

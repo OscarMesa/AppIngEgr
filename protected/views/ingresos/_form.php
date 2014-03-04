@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -26,27 +26,15 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'fecha_ingreso'); ?>
-		<?php echo $form->textField($model,'fecha_ingreso'); ?>
-		<?php echo $form->error($model,'fecha_ingreso'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'valor_ingreso'); ?>
 		<?php echo $form->textField($model,'valor_ingreso'); ?>
 		<?php echo $form->error($model,'valor_ingreso'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'usuario_id'); ?>
-		<?php echo $form->textField($model,'usuario_id'); ?>
-		<?php echo $form->error($model,'usuario_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'tipo_egreso'); ?>
-		<?php echo $form->dropDownList($model,'tipo_egreso', CHtml::listData(TipoIngresos::model()->findAll(), 'id', 'descripcion'),array('empty'=>'- Seleccione -')); ?>
-		<?php echo $form->error($model,'tipo_egreso'); ?>
+		<?php echo $form->labelEx($model,'tipo_ingreso_id'); ?>
+		<?php echo $form->dropDownList($model,'tipo_ingreso_id', CHtml::listData(TipoIngresos::model()->findAll(), 'id', 'descripcion'),array('empty'=>'- Seleccione -')); ?>
+		<?php echo $form->error($model,'tipo_ingreso_id'); ?>
 	</div>
 
 	<div class="row buttons">

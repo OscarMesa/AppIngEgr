@@ -3,13 +3,13 @@
 /* @var $model Ingresos */
 
 $this->breadcrumbs=array(
-	'Ingresoses'=>array('index'),
-	'Manage',
+	'Ingresos'=>array('index'),
+	'Administrar',
 );
 
 $this->menu=array(
-	array('label'=>'List Ingresos', 'url'=>array('index')),
-	array('label'=>'Create Ingresos', 'url'=>array('create')),
+	array('label'=>'Listar ingresos', 'url'=>array('index')),
+	array('label'=>'Crear ingreso', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,14 +26,14 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Ingresoses</h1>
+<h1>Administrar Ingresos</h1>
 
 <p>
 También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) al principio de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.    
+o <b>=</b>) al principio de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -49,8 +49,18 @@ or <b>=</b>) al principio de cada uno de los valores de búsqueda para especific
 		'descripcion',
 		'fecha_ingreso',
 		'valor_ingreso',
-		'usuario_id',
-		'tipo_egreso',
+		array(
+            'name' => 'usuario_id',             			
+            'filter'=>  CHtml::listData(Usuarios::model()->findAll(),'id', 'nombre'),
+			'value' => '$data->usuario->nombre',
+            'htmlOptions' => array('width'=>'80px',),
+        ),
+		array(
+            'name' => 'tipo_ingreso_id',
+            'filter'=>  CHtml::listData(TipoIngresos::model()->findAll(),'id', 'descripcion'),
+			'value' => '$data->tipoIngreso->descripcion',
+            'htmlOptions' => array('width'=>'80px',),
+        ),
 		array(
 			'class'=>'CButtonColumn',
 		),

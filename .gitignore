@@ -2,4 +2,6 @@
 /assets/
 /protected/config/main.php
 /nbproject/
+/protected/config/
 /protected/runtime/
+.gitignore
