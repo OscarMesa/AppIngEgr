@@ -1823,3 +1823,36 @@ REQUEST_URI=/AppIngEgr/index.php?r=egresos/admin
 HTTP_REFERER=http://localhost/AppIngEgr/index.php?r=egresos/index
 >>>>>>> 6882c790859d11c1706b2d38e0742d3c08446285
 ---
+2014/03/04 03:15:09 [error] [exception.CException] exception 'CException' with message 'Usuarios tiene una regla de validación inválida. La regla se debe especificar attributos para ser validados y el nombre de su validador.' in C:\xampp\htdocs\YII\framework\base\CModel.php:289
+Stack trace:
+#0 C:\xampp\htdocs\YII\framework\base\CModel.php(260): CModel->createValidators()
+#1 C:\xampp\htdocs\YII\framework\base\CModel.php(304): CModel->getValidators('nombre')
+#2 C:\xampp\htdocs\YII\framework\web\helpers\CHtml.php(1414): CModel->isAttributeRequired('nombre')
+#3 C:\xampp\htdocs\YII\framework\web\widgets\CActiveForm.php(597): CHtml::activeLabelEx(Object(Usuarios), 'nombre', Array)
+#4 C:\xampp\htdocs\AppIngEgr\protected\views\usuarios\_form.php(23): CActiveForm->labelEx(Object(Usuarios), 'nombre')
+#5 C:\xampp\htdocs\YII\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#6 C:\xampp\htdocs\YII\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#7 C:\xampp\htdocs\YII\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#8 C:\xampp\htdocs\AppIngEgr\protected\views\usuarios\create.php(18): CController->renderPartial('_form', Array)
+#9 C:\xampp\htdocs\YII\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#10 C:\xampp\htdocs\YII\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#11 C:\xampp\htdocs\YII\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#12 C:\xampp\htdocs\YII\framework\web\CController.php(782): CController->renderPartial('create', Array, true)
+#13 C:\xampp\htdocs\AppIngEgr\protected\controllers\UsuariosController.php(80): CController->render('create', Array)
+#14 C:\xampp\htdocs\YII\framework\web\actions\CInlineAction.php(49): UsuariosController->actionCreate()
+#15 C:\xampp\htdocs\YII\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#16 C:\xampp\htdocs\YII\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#17 C:\xampp\htdocs\YII\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#18 C:\xampp\htdocs\YII\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#19 C:\xampp\htdocs\YII\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#20 C:\xampp\htdocs\YII\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#21 C:\xampp\htdocs\YII\framework\web\CController.php(291): CFilterChain->run()
+#22 C:\xampp\htdocs\YII\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#23 C:\xampp\htdocs\YII\framework\web\CWebApplication.php(282): CController->run('create')
+#24 C:\xampp\htdocs\YII\framework\web\CWebApplication.php(141): CWebApplication->runController('usuarios/create')
+#25 C:\xampp\htdocs\YII\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#26 C:\xampp\htdocs\AppIngEgr\index.php(13): CApplication->run()
+#27 {main}
+REQUEST_URI=/AppIngEgr/index.php/usuarios/create
+HTTP_REFERER=http://localhost/AppIngEgr/index.php/usuarios/admin
+---

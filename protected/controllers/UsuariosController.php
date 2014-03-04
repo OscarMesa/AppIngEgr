@@ -69,10 +69,13 @@ class UsuariosController extends Controller
 
 		if(isset($_POST['Usuarios']))
 		{
-                       $_POST['Usuarios']['password'] = sha1($_POST['Usuarios']['password']);
 			$model->attributes=$_POST['Usuarios'];
+            $model->password   = !empty($_POST['Usuarios']['password']) ? sha1($_POST['Usuarios']['password']) : '';
+            $model->password2  = !empty($_POST['Usuarios']['password2']) ? sha1($_POST['Usuarios']['password2']) : '';
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
+            $model->password  = '';
+            $model->password2 = '';
 		}
 
 		$this->render('create',array(
@@ -93,13 +96,16 @@ class UsuariosController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Usuarios']))
-		{
-                        $_POST['Usuarios']['password'] = sha1($_POST['Usuarios']['password']);
-			$model->attributes=$_POST['Usuarios'];
+		{            
+			$model->attributes=$_POST['Usuarios'];            
+            $model->password   = !empty($_POST['Usuarios']['password']) ? sha1($_POST['Usuarios']['password']) : '';
+            $model->password2  = !empty($_POST['Usuarios']['password2']) ? sha1($_POST['Usuarios']['password2']) : '';
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id));                        
 		}
-
+        $model->password  = '';
+        $model->password2 = '';
+        
 		$this->render('update',array(
 			'model'=>$model,
 		));

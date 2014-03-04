@@ -15,7 +15,8 @@
  */
 class Usuarios extends CActiveRecord
 {
-	/**
+    public $password2;
+    /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -31,12 +32,15 @@ class Usuarios extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, username, password', 'required'),
+			array('nombre, username, password, email', 'required','on'=>'insert'),
+			array('nombre, username, email', 'required','on'=>'update'),
 			array('nombre', 'length', 'max'=>300),
-			array('username, password', 'length', 'max'=>100),
+			array('username, password, password2, email', 'length', 'max'=>100),
+			array('email', 'email', 'message'=>'La dirección de email es incorrecta'),
+			array('password2', 'compare', 'compareAttribute' => 'password', 'message'=>'La contraseñas son diferentes'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nombre, username, password', 'safe', 'on'=>'search'),
+			array('id, nombre, username, email', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,8 +65,9 @@ class Usuarios extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'nombre' => 'Nombre',
-			'username' => 'Username',
-			'password' => 'Password',
+			'username' => 'Nombre de usuario',
+			'password' => 'Contraseña',
+			'password2' => 'Repetir contraseña',
 		);
 	}
 
@@ -87,7 +92,7 @@ class Usuarios extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('nombre',$this->nombre,true);
 		$criteria->compare('username',$this->username,true);
-		$criteria->compare('password',$this->password,true);
+		$criteria->compare('email',$this->email,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

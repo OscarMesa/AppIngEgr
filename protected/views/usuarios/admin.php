@@ -3,13 +3,13 @@
 /* @var $model Usuarios */
 
 $this->breadcrumbs=array(
-	'Usuarioses'=>array('index'),
-	'Manage',
+	'Usuarios'=>array('index'),
+	'Administrar',
 );
 
 $this->menu=array(
-	array('label'=>'List Usuarios', 'url'=>array('index')),
-	array('label'=>'Create Usuarios', 'url'=>array('create')),
+	array('label'=>'Listar usuarios', 'url'=>array('index')),
+	array('label'=>'Crear usuario', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,14 +26,14 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Usuarioses</h1>
+<h1>Administrar usuarios</h1>
 
 <p>
 También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) al principio de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.    
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -48,7 +48,7 @@ or <b>=</b>) al principio de cada uno de los valores de búsqueda para especific
 		'id',
 		'nombre',
 		'username',
-		'password',
+		'email',
 		array(
 			'class'=>'CButtonColumn',
 		),
