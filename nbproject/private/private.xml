@@ -2,4 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/var/www/AppIngEgr/.gitignore</file>
+        <file>file:/var/www/AppIngEgr/protected/models/Egresos.php</file>
+        <file>file:/var/www/AppIngEgr/protected/models/Usuarios.php</file>
+        <file>file:/var/www/AppIngEgr/protected/models/TipoEgresos.php</file>
+        <file>file:/var/www/AppIngEgr/protected/controllers/EgresosController.php</file>
+        <file>file:/var/www/AppIngEgr/protected/views/egresos/view.php</file>
+        <file>file:/var/www/AppIngEgr/protected/views/egresos/update.php</file>
+        <file>file:/var/www/AppIngEgr/protected/views/egresos/admin.php</file>
+    </open-files>
 </project-private>
