@@ -35,7 +35,7 @@
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Usuarios', 'url'=>array('/usuarios/index'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Ingresos', 'url'=>array('/ingresos/index'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Egresos', 'url'=>array('/egresos/index'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Egresos', 'url'=>array('/egresos/admin  '), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>

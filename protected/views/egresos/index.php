@@ -3,12 +3,12 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Egresoses',
+	'Egresos',
 );
 
 $this->menu=array(
-	array('label'=>'Create Egresos', 'url'=>array('create')),
-	array('label'=>'Manage Egresos', 'url'=>array('admin')),
+	array('label'=>'Crear Egresos', 'url'=>array('create')),
+	array('label'=>'Administrar Egresos', 'url'=>array('admin')),
 );
 ?>
 

@@ -13,7 +13,7 @@
  *
  * The followings are the available model relations:
  * @property TipoEgresos $tipoEgreso
- * @property Usuarios $usuario
+ * @property Usuarios[] $Usuario
  */
 class Egresos extends CActiveRecord
 {
@@ -64,7 +64,7 @@ class Egresos extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'deescripcion' => 'Deescripcion',
-			'fecha_ingreso' => 'Fecha Ingreso',
+			'fecha_ingreso' => 'Fecha Egreso',
 			'valor_egresos' => 'Valor Egresos',
 			'usuario_id' => 'Usuario',
 			'tipo_egreso_id' => 'Tipo Egreso',

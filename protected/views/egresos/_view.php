@@ -22,11 +22,11 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('usuario_id')); ?>:</b>
-	<?php echo CHtml::encode($data->usuario_id); ?>
+	<?php echo CHtml::encode($data->usuario->nombre); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tipo_egreso_id')); ?>:</b>
-	<?php echo CHtml::encode($data->tipo_egreso_id); ?>
+	<?php echo CHtml::encode($data->tipoEgreso->descripcion); ?>
 	<br />
 
 
