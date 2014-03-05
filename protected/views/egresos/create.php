@@ -3,16 +3,16 @@
 /* @var $model Egresos */
 
 $this->breadcrumbs=array(
-	'Egresoses'=>array('index'),
+	'Egresos'=>array('index'),
 	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Egresos', 'url'=>array('index')),
-	array('label'=>'Administrar Egresos', 'url'=>array('admin')),
+	array('label'=>'Listar egresos', 'url'=>array('index')),
+	array('label'=>'Administrar egresos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Egresos</h1>
+<h1>Crear egreso</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

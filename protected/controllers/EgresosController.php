@@ -66,13 +66,15 @@ class EgresosController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-                if(isset($_POST['Egresos']))
+        if(isset($_POST['Egresos']))
 		{
 			$model->attributes=$_POST['Egresos'];
                         $model->usuario_id = Yii::app()->user->id;
                         $model->fecha_ingreso = date('Y-m-d h-i-s');
-			if($model->save())
+			if($model->save()){
+                Yii::app()->user->setFlash('success', "Gracias su egreso fue registrado con exito!");
 				$this->redirect(array('view','id'=>$model->id));
+            }
 		}
 
 		$this->render('create',array(
@@ -95,8 +97,10 @@ class EgresosController extends Controller
 		if(isset($_POST['Egresos']))
 		{
 			$model->attributes=$_POST['Egresos'];
-			if($model->save())
+			if($model->save()){
+                Yii::app()->user->setFlash('success', "Gracias su egreso fue modificado con exito!");
 				$this->redirect(array('view','id'=>$model->id));
+            }
 		}
 
 		$this->render('update',array(

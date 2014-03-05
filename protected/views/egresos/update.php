@@ -3,7 +3,7 @@
 /* @var $model Egresos */
 
 $this->breadcrumbs=array(
-	'Egresos'=>array('index'),
+	'Egreso'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
 	'Actualizar',
 );
@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Egresos <?php echo $model->id; ?></h1>
+<h1>Actualizar egreso <?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

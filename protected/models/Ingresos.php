@@ -35,8 +35,8 @@ class Ingresos extends CActiveRecord
 		return array(
 			array('descripcion, fecha_ingreso, valor_ingreso, usuario_id, tipo_ingreso_id', 'required','message'=>'El campo {attribute} es requerido'),
 			array('usuario_id, tipo_ingreso_id', 'numerical', 'integerOnly'=>true),
-			array('valor_ingreso', 'numerical'),
-			array('descripcion', 'length', 'max'=>300),
+			array('valor_ingreso', 'numerical', 'integerOnly'=>true, 'min'=>1),            
+			array('descripcion', 'length', 'max'=>300),            
             array('fecha_ingreso', 'date', 'format'=>'yyyy-M-d H:m:s'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

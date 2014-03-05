@@ -1856,3 +1856,80 @@ Stack trace:
 REQUEST_URI=/AppIngEgr/index.php/usuarios/create
 HTTP_REFERER=http://localhost/AppIngEgr/index.php/usuarios/admin
 ---
+2014/03/05 02:51:21 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1045] Access denied for user 'oscar'@'localhost' (using password: YES)' in C:\xampp\htdocs\YII\framework\db\CDbConnection.php:382
+Stack trace:
+#0 C:\xampp\htdocs\YII\framework\db\CDbConnection.php(330): CDbConnection->open()
+#1 C:\xampp\htdocs\YII\framework\db\CDbConnection.php(308): CDbConnection->setActive(true)
+#2 C:\xampp\htdocs\YII\framework\base\CModule.php(387): CDbConnection->init()
+#3 C:\xampp\htdocs\YII\framework\base\CApplication.php(450): CModule->getComponent('db')
+#4 C:\xampp\htdocs\YII\framework\db\ar\CActiveRecord.php(634): CApplication->getDb()
+#5 C:\xampp\htdocs\YII\framework\db\ar\CActiveRecord.php(667): CActiveRecord->getDbConnection()
+#6 C:\xampp\htdocs\YII\framework\db\ar\CActiveRecord.php(1469): CActiveRecord->getCommandBuilder()
+#7 C:\xampp\htdocs\AppIngEgr\protected\components\UserIdentity.php(21): CActiveRecord->findAll()
+#8 C:\xampp\htdocs\AppIngEgr\protected\models\LoginForm.php(52): UserIdentity->authenticate()
+#9 C:\xampp\htdocs\YII\framework\validators\CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#10 C:\xampp\htdocs\YII\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#11 C:\xampp\htdocs\YII\framework\base\CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#12 C:\xampp\htdocs\AppIngEgr\protected\controllers\SiteController.php(94): CModel->validate()
+#13 C:\xampp\htdocs\YII\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#14 C:\xampp\htdocs\YII\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\xampp\htdocs\YII\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#16 C:\xampp\htdocs\YII\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\xampp\htdocs\YII\framework\web\CWebApplication.php(282): CController->run('login')
+#18 C:\xampp\htdocs\YII\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#19 C:\xampp\htdocs\YII\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\xampp\htdocs\AppIngEgr\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/AppIngEgr/index.php/site/login
+HTTP_REFERER=http://localhost/AppIngEgr/index.php/site/login
+---
+2014/03/05 03:32:20 [error] [exception.CException] exception 'CException' with message 'La propiedad "Ingresos"."valor_ingreso_repeat" no se encuentra definida.' in C:\xampp\htdocs\YII\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\YII\framework\db\ar\CActiveRecord.php(145): CComponent->__get('valor_ingreso_r...')
+#1 C:\xampp\htdocs\YII\framework\validators\CCompareValidator.php(92): CActiveRecord->__get('valor_ingreso_r...')
+#2 C:\xampp\htdocs\YII\framework\validators\CValidator.php(213): CCompareValidator->validateAttribute(Object(Ingresos), 'valor_ingreso')
+#3 C:\xampp\htdocs\YII\framework\base\CModel.php(159): CValidator->validate(Object(Ingresos), NULL)
+#4 C:\xampp\htdocs\YII\framework\db\ar\CActiveRecord.php(805): CModel->validate(NULL)
+#5 C:\xampp\htdocs\AppIngEgr\protected\controllers\IngresosController.php(75): CActiveRecord->save()
+#6 C:\xampp\htdocs\YII\framework\web\actions\CInlineAction.php(49): IngresosController->actionCreate()
+#7 C:\xampp\htdocs\YII\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\YII\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\YII\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\YII\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\YII\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\YII\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\YII\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\YII\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\YII\framework\web\CWebApplication.php(282): CController->run('create')
+#16 C:\xampp\htdocs\YII\framework\web\CWebApplication.php(141): CWebApplication->runController('ingresos/create')
+#17 C:\xampp\htdocs\YII\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\AppIngEgr\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/AppIngEgr/index.php/ingresos/create
+HTTP_REFERER=http://localhost/AppIngEgr/index.php/ingresos/create
+---
+2014/03/05 04:54:54 [error] [exception.CException] exception 'CException' with message 'La propiedad "Egresos"."valor_ingreso" no se encuentra definida.' in C:\xampp\htdocs\YII\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\YII\framework\db\ar\CActiveRecord.php(145): CComponent->__get('valor_ingreso')
+#1 C:\xampp\htdocs\YII\framework\validators\CNumberValidator.php(78): CActiveRecord->__get('valor_ingreso')
+#2 C:\xampp\htdocs\YII\framework\validators\CValidator.php(213): CNumberValidator->validateAttribute(Object(Egresos), 'valor_ingreso')
+#3 C:\xampp\htdocs\YII\framework\base\CModel.php(159): CValidator->validate(Object(Egresos), NULL)
+#4 C:\xampp\htdocs\YII\framework\db\ar\CActiveRecord.php(805): CModel->validate(NULL)
+#5 C:\xampp\htdocs\AppIngEgr\protected\controllers\EgresosController.php(74): CActiveRecord->save()
+#6 C:\xampp\htdocs\YII\framework\web\actions\CInlineAction.php(49): EgresosController->actionCreate()
+#7 C:\xampp\htdocs\YII\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\YII\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\YII\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\YII\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\YII\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\YII\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\YII\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\YII\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\YII\framework\web\CWebApplication.php(282): CController->run('create')
+#16 C:\xampp\htdocs\YII\framework\web\CWebApplication.php(141): CWebApplication->runController('egresos/create')
+#17 C:\xampp\htdocs\YII\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\AppIngEgr\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/AppIngEgr/index.php/egresos/create
+HTTP_REFERER=http://localhost/AppIngEgr/index.php/egresos/create
+---

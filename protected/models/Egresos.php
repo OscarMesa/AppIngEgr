@@ -36,6 +36,7 @@ class Egresos extends CActiveRecord
 			array('deescripcion, fecha_ingreso, valor_egresos, usuario_id, tipo_egreso_id', 'required'),
 			array('usuario_id, tipo_egreso_id', 'numerical', 'integerOnly'=>true),
 			array('valor_egresos', 'numerical'),
+            array('valor_egresos', 'numerical', 'integerOnly'=>true, 'min'=>1),
 			array('deescripcion', 'length', 'max'=>300),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
