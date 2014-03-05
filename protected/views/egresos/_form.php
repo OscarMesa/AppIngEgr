@@ -48,6 +48,27 @@
                 <?php echo $form->dropDownList($model,'tipo_egreso_id', CHtml::listData(TipoEgresos::model()->findAll(), 'id', 'descripcion'),array('empty'=>'- Seleccione -'));?>
 		<?php echo $form->error($model,'tipo_egreso_id'); ?>
 	</div>
+    
+    <div class="row">
+		<?php echo $form->labelEx($model,'fecha_ingreso'); ?>
+        <?php 
+            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                'model' => $model,
+                'value'=>date('Y-m-d'),
+                'attribute' => 'fecha_ingreso',
+                'options' => array(
+					'changeMonth' => true,
+        			'changeYear' => true,
+                    'showOn' => 'button',
+                    'dateFormat' => 'yy-mm-dd',
+                ),
+                'htmlOptions' => array(
+                    //'style' => '',
+                ),
+            ));
+        ?>        
+		<?php echo $form->error($model,'fecha_ingreso'); ?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>

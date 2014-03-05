@@ -38,6 +38,7 @@ class Egresos extends CActiveRecord
 			array('valor_egresos', 'numerical'),
             array('valor_egresos', 'numerical', 'integerOnly'=>true, 'min'=>1),
 			array('deescripcion', 'length', 'max'=>300),
+            array('fecha_ingreso', 'date', 'format'=>'yyyy-M-d'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, deescripcion, fecha_ingreso, valor_egresos, usuario_id, tipo_egreso_id', 'safe', 'on'=>'search'),
@@ -64,11 +65,11 @@ class Egresos extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'deescripcion' => 'Deescripcion',
-			'fecha_ingreso' => 'Fecha Egreso',
-			'valor_egresos' => 'Valor Egresos',
+			'deescripcion' => 'Descripción',
+			'fecha_ingreso' => 'Fecha egreso',
+			'valor_egresos' => 'Valor egresos',
 			'usuario_id' => 'Usuario',
-			'tipo_egreso_id' => 'Tipo Egreso',
+			'tipo_egreso_id' => 'Tipo egreso',
 		);
 	}
 
@@ -102,6 +103,10 @@ class Egresos extends CActiveRecord
 		));
 	}
 
+    public function formatDate() {
+        return date("Y-m-d",  strtotime($this->fecha_ingreso));
+    }
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

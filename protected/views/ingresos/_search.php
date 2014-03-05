@@ -20,12 +20,7 @@
 		<?php echo $form->label($model,'descripcion'); ?>
 		<?php echo $form->textField($model,'descripcion',array('size'=>60,'maxlength'=>300)); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'fecha_ingreso'); ?>
-		<?php echo $form->textField($model,'fecha_ingreso'); ?>
-	</div>
-
+    
 	<div class="row">
 		<?php echo $form->label($model,'valor_ingreso'); ?>
 		<?php echo $form->textField($model,'valor_ingreso'); ?>
@@ -41,6 +36,25 @@
 		<?php echo $form->dropDownList($model,'tipo_ingreso_id', CHtml::listData(TipoIngresos::model()->findAll(), 'id', 'descripcion'),array('empty'=>'- Seleccione -')); ?>
 	</div>
 
+    <div class="row">
+		<?php echo $form->labelEx($model,'fecha_ingreso'); ?>
+        <?php 
+            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                'model' => $model,
+                'attribute' => 'fecha_ingreso',
+                'options' => array(
+					'changeMonth' => true,
+        			'changeYear' => true,
+                    'showOn' => 'button',
+                    'dateFormat' => 'yy-mm-dd',
+                ),
+                'htmlOptions' => array(
+                    //'style' => '',
+                ),
+            ));
+        ?>        
+	</div>
+    
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Buscar'); ?>
 	</div>
