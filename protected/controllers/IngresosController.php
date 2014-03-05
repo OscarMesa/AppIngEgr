@@ -63,14 +63,13 @@ class IngresosController extends Controller
 	public function actionCreate()
 	{
 		$model=new Ingresos;
-
+        $model->fecha_ingreso = date('Y-m-d');
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Ingresos']))
 		{
 			$model->attributes=$_POST['Ingresos'];
-            $model->fecha_ingreso = date('Y-m-d H:i:s');
             $model->usuario_id = Yii::app()->user->id;
 			if($model->save()) {
                 Yii::app()->user->setFlash('success', "Gracias su ingreso fue registrado con exito!");

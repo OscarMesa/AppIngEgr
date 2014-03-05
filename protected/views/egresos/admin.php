@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Administrador egresos</h1>
+<h1>Administrar egresos</h1>
 
 <p>
     También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -50,7 +50,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'columns' => array(
         'id',
         'deescripcion',
-        'fecha_ingreso',
+        array(
+            'name'=>'fecha_ingreso',
+            'value' => '$data->formatDate()',
+        ),
         'valor_egresos',
         array(
             'name' => 'usuario_id',

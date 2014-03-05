@@ -63,14 +63,13 @@ class EgresosController extends Controller
 	public function actionCreate()
 	{
 		$model=new Egresos;
-
+        $model->fecha_ingreso = date('Y-m-d');
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
         if(isset($_POST['Egresos']))
 		{
 			$model->attributes=$_POST['Egresos'];
-                        $model->usuario_id = Yii::app()->user->id;
-                        $model->fecha_ingreso = date('Y-m-d h-i-s');
+            $model->usuario_id = Yii::app()->user->id;            
 			if($model->save()){
                 Yii::app()->user->setFlash('success', "Gracias su egreso fue registrado con exito!");
 				$this->redirect(array('view','id'=>$model->id));

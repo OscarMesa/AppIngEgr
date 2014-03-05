@@ -47,7 +47,10 @@ o <b>=</b>) al principio de cada uno de los valores de búsqueda para especifica
 	'columns'=>array(
 		'id',
 		'descripcion',
-		'fecha_ingreso',
+		array(
+            'name'=>'fecha_ingreso',
+            'value' => '$data->formatDate()',
+        ),
 		'valor_ingreso',
 		array(
             'name' => 'usuario_id',             			
