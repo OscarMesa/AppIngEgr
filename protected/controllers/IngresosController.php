@@ -72,8 +72,10 @@ class IngresosController extends Controller
 			$model->attributes=$_POST['Ingresos'];
             $model->fecha_ingreso = date('Y-m-d H:i:s');
             $model->usuario_id = Yii::app()->user->id;
-			if($model->save())
+			if($model->save()) {
+                Yii::app()->user->setFlash('success', "Gracias su ingreso fue registrado con exito!");
 				$this->redirect(array('view','id'=>$model->id));
+            }
 		}
 
 		$this->render('create',array(
@@ -96,8 +98,10 @@ class IngresosController extends Controller
 		if(isset($_POST['Ingresos']))
 		{
 			$model->attributes=$_POST['Ingresos'];
-			if($model->save())
+			if($model->save()) {
+                Yii::app()->user->setFlash('success', "Gracias su ingreso fue modificado con exito!");
 				$this->redirect(array('view','id'=>$model->id));
+            }
 		}
 
 		$this->render('update',array(

@@ -1,7 +1,5 @@
-/nbproject/private/
 /assets/
 /protected/config/
 /nbproject/
-/protected/config/
-/protected/runtime/
+/protected/runtime/application.log
 .gitignore
