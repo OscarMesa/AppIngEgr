@@ -63,7 +63,7 @@ class EgresosController extends Controller
 	public function actionCreate()
 	{
 		$model=new Egresos;
-        $model->fecha_ingreso = date('Y-m-d');
+        $model->fecha_egreso = date('Y-m-d');
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
         if(isset($_POST['Egresos']))

@@ -35,8 +35,8 @@ $this->widget('zii.widgets.CDetailView', array(
     'data' => $model,
     'attributes' => array(
         'id',
-        'deescripcion',
-        'fecha_ingreso',
+        'descripcion',
+        'fecha_egreso',
         'valor_egresos',
         array(
             'name' => 'usuario_id',

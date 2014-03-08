@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS `tipo_ingresos` (
 
 CREATE TABLE IF NOT EXISTS `egresos` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
-  `deescripcion` varchar(300) COLLATE utf8_unicode_ci NOT,
-  `fecha_engreso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `descripcion` varchar(300) COLLATE utf8_unicode_ci NULL,
+  `fecha_egreso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `valor_egresos` double NOT NULL,
   `usuario_id` int(5) NOT NULL,
   `tipo_egreso_id` int(5) NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `correo` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE(`correo`),
   UNIQUE(`username`)
@@ -98,7 +98,12 @@ ALTER TABLE `ingresos`
 -- Dumping data for table `egresos`
 --
 
-INSERT INTO `egresos` (`id`, `deescripcion`, `fecha_ingreso`, `valor_egresos`, `usuario_id`, `tipo_egreso_id`) VALUES
+INSERT INTO `egresos` (`id`, `descr
+INSERT INTO `tipo_ingresos` (`id`, `descripcion`) VALUES
+(1, 'Salario'),
+(2, 'Mesada'),
+(3, 'Suerte'),
+(4, 'Arriendo');ipcion`, `fecha_ingreso`, `valor_egresos`, `usuario_id`, `tipo_egreso_id`) VALUES
 (1, 'prueba', '2014-02-22 05:00:00', 10000, 1, 1);
 
 -- --------------------------------------------------------
@@ -152,9 +157,9 @@ INSERT INTO `tipo_ingresos` (`id`, `descripcion`) VALUES
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `username`, `password`) VALUES
-(1, 'oscar', 'oskar', '40bd001563085fc35165329ea1ff5c5ecbdbbeef'),
-(2, 'julian david giraldo', 'julian', '354106e416911844661e1603d99ecf7d1c318dda');
+INSERT INTO `usuarios` (`id`, `nombre`, `username`, `password`,correo) VALUES
+(1, 'oscar', 'oskar', '40bd001563085fc35165329ea1ff5c5ecbdbbeef','oscarmesae.lpoli@gmail.com'),
+(2, 'julian david giraldo', 'julian', '354106e416911844661e1603d99ecf7d1c318dda','julian.giraldo8@gmail.com');
 
 --
 -- Constraints for dumped tables

@@ -49,9 +49,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'filter' => $model,
     'columns' => array(
         'id',
-        'deescripcion',
+        'descripcion',
         array(
-            'name'=>'fecha_ingreso',
+            'name'=>'fecha_egreso',
             'value' => '$data->formatDate()',
         ),
         'valor_egresos',

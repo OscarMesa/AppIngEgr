@@ -17,8 +17,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'deescripcion'); ?>
-		<?php echo $form->textField($model,'deescripcion',array('size'=>60,'maxlength'=>300)); ?>
+		<?php echo $form->label($model,'descripcion'); ?>
+		<?php echo $form->textField($model,'descripcion',array('size'=>60,'maxlength'=>300)); ?>
 	</div>
 
 	<div class="row">
@@ -37,11 +37,11 @@
 	</div>
 
     <div class="row">
-		<?php echo $form->labelEx($model,'fecha_ingreso'); ?>
+		<?php echo $form->labelEx($model,'fecha_egreso'); ?>
         <?php 
             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                 'model' => $model,
-                'attribute' => 'fecha_ingreso',
+                'attribute' => 'fecha_egreso',
                 'options' => array(
 					'changeMonth' => true,
         			'changeYear' => true,

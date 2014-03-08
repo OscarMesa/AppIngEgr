@@ -9,12 +9,12 @@
 	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('deescripcion')); ?>:</b>
-	<?php echo CHtml::encode($data->deescripcion); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('descripcion')); ?>:</b>
+	<?php echo CHtml::encode($data->descripcion); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_ingreso')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_ingreso); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_egreso')); ?>:</b>
+	<?php echo CHtml::encode($data->fecha_egreso); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('valor_egresos')); ?>:</b>

@@ -20,15 +20,15 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'deescripcion'); ?>
-		<?php echo $form->textField($model,'deescripcion',array('size'=>60,'maxlength'=>300)); ?>
-		<?php echo $form->error($model,'deescripcion'); ?>
+		<?php echo $form->labelEx($model,'descripcion'); ?>
+		<?php echo $form->textField($model,'descripcion',array('size'=>60,'maxlength'=>300)); ?>
+		<?php echo $form->error($model,'descripcion'); ?>
 	</div>
 
 <!--	<div class="row">
-		<?php //echo $form->labelEx($model,'fecha_ingreso'); ?>
-		<?php //echo $form->textField($model,'fecha_ingreso'); ?>
-		<?php //echo $form->error($model,'fecha_ingreso'); ?>
+		<?php //echo $form->labelEx($model,'fecha_egreso'); ?>
+		<?php //echo $form->textField($model,'fecha_egreso'); ?>
+		<?php //echo $form->error($model,'fecha_egreso'); ?>
 	</div>-->
 
 	<div class="row">
@@ -50,12 +50,12 @@
 	</div>
     
     <div class="row">
-		<?php echo $form->labelEx($model,'fecha_ingreso'); ?>
+		<?php echo $form->labelEx($model,'fecha_egreso'); ?>
         <?php 
             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                 'model' => $model,
                 'value'=>date('Y-m-d'),
-                'attribute' => 'fecha_ingreso',
+                'attribute' => 'fecha_egreso',
                 'options' => array(
 					'changeMonth' => true,
         			'changeYear' => true,
@@ -67,7 +67,7 @@
                 ),
             ));
         ?>        
-		<?php echo $form->error($model,'fecha_ingreso'); ?>
+		<?php echo $form->error($model,'fecha_egreso'); ?>
 	</div>
 
 	<div class="row buttons">

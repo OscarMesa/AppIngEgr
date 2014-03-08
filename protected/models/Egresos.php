@@ -5,8 +5,8 @@
  *
  * The followings are the available columns in table 'egresos':
  * @property integer $id
- * @property string $deescripcion
- * @property string $fecha_ingreso
+ * @property string $descripcion
+ * @property string $fecha_egreso
  * @property double $valor_egresos
  * @property integer $usuario_id
  * @property integer $tipo_egreso_id
@@ -33,15 +33,15 @@ class Egresos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('deescripcion, fecha_ingreso, valor_egresos, usuario_id, tipo_egreso_id', 'required'),
+			array('descripcion, fecha_egreso, valor_egresos, usuario_id, tipo_egreso_id', 'required'),
 			array('usuario_id, tipo_egreso_id', 'numerical', 'integerOnly'=>true),
 			array('valor_egresos', 'numerical'),
             array('valor_egresos', 'numerical', 'integerOnly'=>true, 'min'=>1),
-			array('deescripcion', 'length', 'max'=>300),
-            array('fecha_ingreso', 'date', 'format'=>'yyyy-M-d'),
+			array('deecripcion', 'length', 'max'=>300),
+            array('fecha_egreso', 'date', 'format'=>'yyyy-M-d'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, deescripcion, fecha_ingreso, valor_egresos, usuario_id, tipo_egreso_id', 'safe', 'on'=>'search'),
+			array('id, descripcion, fecha_egreso, valor_egresos, usuario_id, tipo_egreso_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,11 +65,11 @@ class Egresos extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'deescripcion' => 'Descripción',
-			'fecha_ingreso' => 'Fecha egreso',
-			'valor_egresos' => 'Valor egresos',
+			'descripcion' => 'Descripción',
+			'fecha_egreso' => 'Fecha',
+			'valor_egresos' => 'Valor',
 			'usuario_id' => 'Usuario',
-			'tipo_egreso_id' => 'Tipo egreso',
+			'tipo_egreso_id' => 'Tipo',
 		);
 	}
 
@@ -92,8 +92,8 @@ class Egresos extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('deescripcion',$this->deescripcion,true);
-		$criteria->compare('fecha_ingreso',$this->fecha_ingreso,true);
+		$criteria->compare('descripcion',$this->descripcion,true);
+		$criteria->compare('fecha_egreso',$this->fecha_egreso,true);
 		$criteria->compare('valor_egresos',$this->valor_egresos);
 		$criteria->compare('usuario_id',$this->usuario_id);
 		$criteria->compare('tipo_egreso_id',$this->tipo_egreso_id);
@@ -104,7 +104,7 @@ class Egresos extends CActiveRecord
 	}
 
     public function formatDate() {
-        return date("Y-m-d",  strtotime($this->fecha_ingreso));
+        return date("Y-m-d",  strtotime($this->fecha_egreso));
     }
     
 	/**

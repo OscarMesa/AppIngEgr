@@ -65,10 +65,10 @@ class Ingresos extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
-			'fecha_ingreso' => 'Fecha Ingreso',
-			'valor_ingreso' => 'Valor Ingreso',
+			'fecha_ingreso' => 'Fecha',
+			'valor_ingreso' => 'Valor',
 			'usuario_id' => 'Usuario',
-			'tipo_ingreso_id' => 'Tipo Ingreso',
+			'tipo_ingreso_id' => 'Tipo',
 		);
 	}
 
