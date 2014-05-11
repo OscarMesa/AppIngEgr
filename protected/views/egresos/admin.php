@@ -57,8 +57,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'valor_egresos',
         array(
             'name' => 'usuario_id',
-            'value' => '$data->usuario->nombre',
-            'filter' => CHtml::listData(Usuarios::model()->findAll(), 'id', 'nombre'),
+            'value' => '$data->usuario->nombre1',
+            'filter' => CHtml::listData(Usuarios::model()->findAll(), 'id', 'nombre1'),
         ),
         array(
             'name' => 'tipo_egreso_id',

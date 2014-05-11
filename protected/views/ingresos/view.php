@@ -36,7 +36,10 @@ $this->widget('zii.widgets.CDetailView', array(
     'attributes' => array(
         'id',
         'descripcion',
-        'fecha_ingreso',
+         array(
+             'label' => $model->getAttributeLabel('fecha_ingreso'),
+             'value' => date('Y-m-d',  strtotime($model->fecha_ingreso))
+         ),
         'valor_ingreso',
         array(
             'label' => $model->getAttributeLabel('usuario_id'),

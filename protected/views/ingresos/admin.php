@@ -52,10 +52,10 @@ o <b>=</b>) al principio de cada uno de los valores de búsqueda para especifica
             'value' => '$data->formatDate()',
         ),
 		'valor_ingreso',
-		array(
+        array(
             'name' => 'usuario_id',             			
-            'filter'=>  CHtml::listData(Usuarios::model()->findAll(),'id', 'nombre'),
-			'value' => '$data->usuario->nombre',
+            'filter'=>  CHtml::listData(Usuarios::model()->findAll(),'id', 'nombre1'),
+			'value' => '$data->usuario->nombre1',
             'htmlOptions' => array('width'=>'80px',),
         ),
 		array(

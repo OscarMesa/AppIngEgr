@@ -42,7 +42,7 @@
         <?php 
             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                 'model' => $model,
-                'value'=>date('Y-m-d'),
+                'value'=> ($model->fecha_ingreso!=''? date('Y-m-d',  strtotime($model->fecha_ingreso)):date('Y-m-d')),
                 'attribute' => 'fecha_ingreso',
                 'options' => array(
 					'changeMonth' => true,
