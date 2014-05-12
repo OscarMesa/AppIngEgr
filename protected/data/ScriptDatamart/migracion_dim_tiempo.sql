@@ -3,8 +3,6 @@
     CREATE PROCEDURE migracion_dim_tiempo()
     BEGIN
 
-
-    -- delete from DatamartIngresos.dim_tiempo;
     -- menor 
     SELECT MAX( fecha ) FROM DatamartIngresos.dim_tiempo INTO @fi;
     IF (@fi IS NULL) THEN
@@ -41,8 +39,6 @@
     set @fi = DATE_ADD(@fi, INTERVAL 1 DAY); 
      
     END WHILE;
-
-    SELECT @fi;
 
     END;//
     delimiter ;
