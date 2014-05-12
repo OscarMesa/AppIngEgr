@@ -20,10 +20,28 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'nombre'); ?>
-		<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>300)); ?>
-		<?php echo $form->error($model,'nombre'); ?>
+		<?php echo $form->labelEx($model,'nombre1'); ?>
+		<?php echo $form->textField($model,'nombre1',array('size'=>60,'maxlength'=>300)); ?>
+		<?php echo $form->error($model,'nombre1'); ?>
 	</div>
+        
+	<div class="row">
+		<?php echo $form->labelEx($model,'nombre2'); ?>
+		<?php echo $form->textField($model,'nombre2',array('size'=>60,'maxlength'=>300)); ?>
+		<?php echo $form->error($model,'nombre2'); ?>
+	</div>        
+
+        <div class="row">
+		<?php echo $form->labelEx($model,'apellido1'); ?>
+		<?php echo $form->textField($model,'apellido1',array('size'=>60,'maxlength'=>300)); ?>
+		<?php echo $form->error($model,'apellido1'); ?>
+	</div>        
+
+        <div class="row">
+		<?php echo $form->labelEx($model,'apellido2'); ?>
+		<?php echo $form->textField($model,'apellido2',array('size'=>60,'maxlength'=>300)); ?>
+		<?php echo $form->error($model,'apellido2'); ?>
+	</div>        
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'username'); ?>

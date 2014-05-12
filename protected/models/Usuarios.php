@@ -21,6 +21,7 @@
  */
 class Usuarios extends CActiveRecord
 {
+        public $password2;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -45,7 +46,9 @@ class Usuarios extends CActiveRecord
 			array('apellido2', 'length', 'max'=>30),
 			array('username', 'length', 'max'=>60),
 			array('email', 'length', 'max'=>80),
-			// The following rule is used by search().
+                        array('password2', 'compare', 'compareAttribute' => 'password', 'message'=>'La contraseñas son diferentes'),
+			array('email', 'email', 'message'=>'La dirección de email es incorrecta'),
+                        // The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, nombre1, nombre2, apellido1, apellido2, identificacion, id_tipo_identidad, username, password, email', 'safe', 'on'=>'search'),
 		);
@@ -71,15 +74,16 @@ class Usuarios extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'nombre1' => 'Nombre1',
-			'nombre2' => 'Nombre2',
-			'apellido1' => 'Apellido1',
-			'apellido2' => 'Apellido2',
+			'nombre1' => 'Nombre 1',
+			'nombre2' => 'Nombre 2',
+			'apellido1' => 'Apellido 1',
+			'apellido2' => 'Apellido 2',
 			'identificacion' => 'Identificacion',
-			'id_tipo_identidad' => 'Id Tipo Identidad',
-			'username' => 'Username',
-			'password' => 'Password',
-			'email' => 'Email',
+			'id_tipo_identidad' => 'Tipo Identidad',
+			'username' => 'Nombre de usuario',
+			'password' => 'Contraseña',
+                        'password2' => 'Repetir contraseña',
+			'email' => 'Correo',
 		);
 	}
 
