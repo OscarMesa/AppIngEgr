@@ -4,18 +4,9 @@ CREATE PROCEDURE migracion_fac_ingresos_diarios()
 BEGIN
     DECLARE count INT DEFAULT 2;
     DECLARE valor DOUBLE;
-    DECLARE nombre1 VARCHAR(100);
-    DECLARE nombre2 VARCHAR(100);
-    DECLARE apellido1 VARCHAR(100);
-    DECLARE apellido2 VARCHAR(100);
-    DECLARE tipo_identificacion VARCHAR(100);
-    DECLARE fecha_creacion DATE;
-    DECLARE fecha_modificacion DATE;
-    DECLARE um_nombre1 VARCHAR(100);
-    DECLARE um_apellido1 VARCHAR(100);
     DECLARE done INT DEFAULT 0;
     DECLARE c_ingresos CURSOR;
-    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+   -- DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
 
     SELECT MAX( fecha ) FROM DatamartIngresos.dim_tiempo INTO @fi;
     IF (@fi IS NULL) THEN
