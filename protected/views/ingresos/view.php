@@ -43,7 +43,7 @@ $this->widget('zii.widgets.CDetailView', array(
         'valor_ingreso',
         array(
             'label' => $model->getAttributeLabel('usuario_id'),
-            'value' => $model->usuario->nombre,
+            'value' => $model->usuario->nombre1. ' '. $model->usuario->apellido1 ,
         ),
         array(
             'label' => $model->getAttributeLabel('tipo_ingreso_id'),

@@ -2,39 +2,45 @@ DROP PROCEDURE IF EXISTS migracion_fac_ingresos_diarios;
 delimiter //
 CREATE PROCEDURE migracion_fac_ingresos_diarios()
 BEGIN
-    DECLARE count INT DEFAULT 2;
-    DECLARE valor DOUBLE;
-    DECLARE done INT DEFAULT 0;
-    DECLARE c_ingresos CURSOR;
-   -- DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+    
+    DECLARE fecha DATE;
 
-    SELECT MAX( fecha ) FROM DatamartIngresos.dim_tiempo INTO @fi;
+    SELECT MAX( t.fecha ) FROM DatamartIngresos.fac_ingresos_diarios ingre JOIN  DatamartIngresos.dim_tiempo t ON (t.id_fecha = ingre.fecha_ingreso) INTO @fi;
     IF (@fi IS NULL) THEN
         SELECT MIN( fecha_ingreso ) FROM IngresoEgresos.ingresos INTO @fi;
-    END IF; 
-     
-    SELECT DATE_FORMAT(NOW(),'%Y-%m-%d') INTO @ff;
-    
-    OPEN c_ingresos FOR 
-                    SELECT SUM( valor_ingreso ) valor , usuario_id, fecha_ingreso FROM IngresoEgresos.ingresos WHERE fecha_ingreso BETWEEN DATE_FORMAT(@fi,  '%Y-%m-%d' ) AND DATE_FORMAT(@ff,  '%Y-%m-%d' ) GROUP BY usuario_id, fecha_ingreso;        
-
-         LOOP
-            FETCH c_ingresos INTO valor;     
-          END LOOP;  
-        CLOSE c_ingresos;
---     REPEAT
---         FETCH c_personas INTO id,nombre1,nombre2,apellido1,apellido2,tipo_identificacion,fecha_creacion,fecha_modificacion,um_nombre1,um_apellido1;
---             IF NOT done THEN
---                 SET count = (SELECT COUNT(DIDP.id_persona) FROM DatamartIngresos.dim_persona DIDP WHERE DIDP.id_persona = id);
---                 IF count = 0 THEN
---                     INSERT INTO DatamartIngresos.dim_persona (id_persona,tipo_identificacion,nombre_completo,fecha_creacion,fecha_modificacion,usuario_modificador) VALUE(id,tipo_identificacion,CONCAT(nombre1,' ',nombre2,' ',apellido1,' ',apellido2),fecha_creacion,fecha_modificacion,CONCAT(um_nombre1,' ',um_apellido1));
---                 ELSE
---                     UPDATE DatamartIngresos.dim_persona SET tipo_identificacion=tipo_identificacion,nombre_completo=CONCAT(nombre1,' ',nombre2,' ',apellido1,' ',apellido2),fecha_creacion=fecha_creacion,fecha_modificacion=fecha_modificacion,usuario_modificador=CONCAT(um_nombre1,' ',um_apellido1)  WHERE id_persona =id;
---                 END IF;
---             END IF;
---     UNTIL done END REPEAT;
---     
+    ELSE
+        @fi = DATE_ADD(@fi, INTERVAL 1 DAY);
+    END IF;
+   CALL migracion_fac_ingresos_diarios_process(@fi);
 END;//
 delimiter ;
 
-CALL migracion_fac_ingresos_diarios;
+CALL migracion_fac_ingresos_diarios();
+
+
+DROP PROCEDURE IF EXISTS migracion_fac_ingresos_diarios_process;
+
+delimiter //
+CREATE PROCEDURE migracion_fac_ingresos_diarios_process(IN fechafi DATE)
+BEGIN
+   DECLARE id INT;
+   DECLARE fecha_id INT;
+   DECLARE id_ingreso INT;
+   DECLARE id_tp_ingreso INT;
+   DECLARE total DOUBLE;
+   DECLARE done INT DEFAULT 0;
+   DECLARE f VARCHAR(20);
+   DECLARE c_ingresos CURSOR FOR SELECT SUM( valor_ingreso ) total , usuario_id, fecha_ingreso,tipo_ingreso_id FROM IngresoEgresos.ingresos WHERE fecha_ingreso BETWEEN DATE_FORMAT(fechafi,  '%Y-%m-%d' ) AND DATE_FORMAT(now(),  '%Y-%m-%d' ) GROUP BY usuario_id, fecha_ingreso;
+   DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+   OPEN c_ingresos;
+
+    REPEAT
+        FETCH c_ingresos INTO total,id,f,id_ingreso;
+        SET fecha_id = (SELECT MAX(id_fecha) FROM DatamartIngresos.dim_tiempo WHERE `fecha` = f LIMIT 1);
+        SET id_tp_ingreso = (SELECT MAX(id_tipo_ingreso) FROM DatamartIngresos.dim_tipo_ingreso WHERE cod_tipo_ingreso = id_ingreso LIMIT 1);
+        INSERT INTO DatamartIngresos.fac_ingresos_diarios (id_persona,fecha_ingreso,id_tipo_ingreso,total_ingreso_dia) VALUE(id,fecha_id,id_tp_ingreso,total);
+    UNTIL done END REPEAT;   
+    CLOSE c_ingresos;
+    SELECT  fechafi;
+    END; //
+delimiter ;
