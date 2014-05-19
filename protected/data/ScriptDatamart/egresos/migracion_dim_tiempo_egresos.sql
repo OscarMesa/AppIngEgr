@@ -1,20 +1,20 @@
-    DROP PROCEDURE IF EXISTS migracion_dim_tiempo;
+    DROP PROCEDURE IF EXISTS migracion_dim_tiempo_egresos;
     delimiter //
-    CREATE PROCEDURE migracion_dim_tiempo()
+    CREATE PROCEDURE migracion_dim_tiempo_egresos()
     BEGIN
 
     -- menor 
-    SELECT MAX( fecha ) FROM DatamartIngresos.dim_tiempo INTO @fi;
+    SELECT MAX( fecha ) FROM DatamartEgresos.dim_tiempo INTO @fi;
     IF (@fi IS NULL) THEN
-        SELECT MIN( fecha_ingreso ) FROM IngresoEgresos.ingresos INTO @fi;
+        SELECT MIN( fecha_egreso ) FROM IngresoEgresos.egresos INTO @fi;
      END IF; 
     -- mayor
-    SELECT MAX( fecha_ingreso ) FROM IngresoEgresos.ingresos INTO @ff;  
+    SELECT MAX( fecha_egreso ) FROM IngresoEgresos.egresos INTO @ff;  
 
     --  
     while (@fi <= @ff) DO 
       
-    INSERT INTO DatamartIngresos.dim_tiempo
+    INSERT INTO DatamartEgresos.dim_tiempo
         (
             fecha,
             dia,
@@ -30,7 +30,7 @@
             RIGHT(concat('0',day(@fi)),2) Dia,
             weekday(@fi) DiaSemana,
             month(@fi) Mes,
-            year(@fi) y,
+            year(@fi) y,    
             concat(RIGHT(concat('0',day(@fi)),2),' ',monthname(@fi)) nombre_dia,
             dayname(@fi) nombre_dia_semana,
             LEFT(monthname(@fi),3) mes3L,
@@ -43,4 +43,4 @@
     END;//
     delimiter ;
 
-CALL migracion_dim_tiempo();
+CALL migracion_dim_tiempo_egresos();

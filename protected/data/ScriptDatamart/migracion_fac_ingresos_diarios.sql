@@ -36,10 +36,12 @@ BEGIN
 
     REPEAT
         FETCH c_ingresos INTO total,id,f,id_ingreso;
+        IF NOT done THEN
         SET fecha_id = (SELECT MAX(id_fecha) FROM DatamartIngresos.dim_tiempo WHERE `fecha` = f LIMIT 1);
         SET id_tp_ingreso = (SELECT MAX(id_tipo_ingreso) FROM DatamartIngresos.dim_tipo_ingreso WHERE cod_tipo_ingreso = id_ingreso LIMIT 1);
         INSERT INTO DatamartIngresos.fac_ingresos_diarios (id_persona,fecha_ingreso,id_tipo_ingreso,total_ingreso_dia) VALUE(id,fecha_id,id_tp_ingreso,total);
-    UNTIL done END REPEAT;   
+        END IF;
+UNTIL done END REPEAT;   
     CLOSE c_ingresos;
     SELECT  fechafi;
     END; //

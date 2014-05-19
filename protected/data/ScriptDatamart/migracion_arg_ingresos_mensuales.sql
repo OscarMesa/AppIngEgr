@@ -37,10 +37,12 @@ BEGIN
 
     REPEAT
         FETCH c_ingresos INTO total,id,f,id_ingreso;
-        SET fecha_id = (SELECT MAX(id_fecha) FROM DatamartIngresos.dim_tiempo WHERE  DATE_FORMAT(fecha,  '%Y-%m') = DATE_FORMAT( CONCAT(f,'-01'), '%Y-%m' ) LIMIT 1);
-        SET id_tp_ingreso = (SELECT MAX(id_tipo_ingreso) FROM DatamartIngresos.dim_tipo_ingreso WHERE cod_tipo_ingreso = id_ingreso LIMIT 1);
-        INSERT INTO DatamartIngresos.agr_ingresos_mensuales (id_persona,fecha_ingreso,id_tipo_ingreso,total_ingreso_mensuale) VALUE(id,fecha_id,id_tp_ingreso,total);
-    UNTIL done END REPEAT;   
+        IF NOT done THEN
+            SET fecha_id = (SELECT MAX(id_fecha) FROM DatamartIngresos.dim_tiempo WHERE  DATE_FORMAT(fecha,  '%Y-%m') = DATE_FORMAT( CONCAT(f,'-01'), '%Y-%m' ) LIMIT 1);
+            SET id_tp_ingreso = (SELECT MAX(id_tipo_ingreso) FROM DatamartIngresos.dim_tipo_ingreso WHERE cod_tipo_ingreso = id_ingreso LIMIT 1);
+            INSERT INTO DatamartIngresos.agr_ingresos_mensuales (id_persona,fecha_ingreso,id_tipo_ingreso,total_ingreso_mensuale) VALUE(id,fecha_id,id_tp_ingreso,total);
+        END IF;    
+        UNTIL done END REPEAT;   
     CLOSE c_ingresos;
     SELECT  fechafi;
     END; //
