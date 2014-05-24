@@ -2,4 +2,4 @@
 /protected/config/
 /protected/runtime/application.log
 .gitignore
-nbproject/
+/nbproject/
