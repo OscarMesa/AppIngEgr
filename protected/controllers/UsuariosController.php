@@ -70,6 +70,9 @@ class UsuariosController extends Controller
 		if(isset($_POST['Usuarios']))
 		{
 			$model->attributes=$_POST['Usuarios'];
+                        $model->fecha_creacion =  date('Y-m-d H:m:s');
+                        $model->estado_usuario = 'activo';
+                        echo $model->id_usuario_modificador = Yii::app()->user->get_id_user();
             $model->password   = !empty($_POST['Usuarios']['password']) ? sha1($_POST['Usuarios']['password']) : '';
             $model->password2  = !empty($_POST['Usuarios']['password2']) ? sha1($_POST['Usuarios']['password2']) : '';
 			if($model->save())
@@ -97,7 +100,9 @@ class UsuariosController extends Controller
 
 		if(isset($_POST['Usuarios']))
 		{            
-			$model->attributes=$_POST['Usuarios'];            
+			$model->attributes=$_POST['Usuarios'];      
+                         $model->fecha_modificacion = date('Y-m-d H:m:s');
+                        echo $model->id_usuario_modificador = Yii::app()->user->get_id_user();
             $model->password   = !empty($_POST['Usuarios']['password']) ? sha1($_POST['Usuarios']['password']) : '';
             $model->password2  = !empty($_POST['Usuarios']['password2']) ? sha1($_POST['Usuarios']['password2']) : '';
 			if($model->save())
@@ -118,7 +123,8 @@ class UsuariosController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+            Usuarios::model()->updateByPk($id, array('estado_usuario' => 'inactivo'));
+            
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))

@@ -13,6 +13,12 @@ class WebUser extends CWebUser
  
         return parent::__get($name);
     }
+    
+    public function get_id_user()
+    {
+        $u = Usuarios::model()->find('username=?',array($this->id));
+        return $u->id;
+    }
  
     public function login($identity, $duration) {
         $this->setState('__userInfo', $identity->getUser());
