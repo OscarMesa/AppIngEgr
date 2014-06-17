@@ -25,5 +25,6 @@ CLOSE c_ingresos;
 
 SELECT total/c_dias_habiles;
 
+
 END
 //
