@@ -14,10 +14,17 @@
  * @property string $username
  * @property string $password
  * @property string $email
+ * @property string $estado_usuario
+ * @proterty int $id_usuario_modificador
+ * @property string $fecha_creacion
+ * @property string $fecha_modificacion
  *
  * The followings are the available model relations:
  * @property Egresos[] $egresoses
  * @property Ingresos[] $ingresoses
+ * @property TipoIdentificacion $idTipoIdentidad
+ * @property Usuarios $idUsuarioModificador
+ * @property Usuarios[] $usuarioses
  */
 class Usuarios extends CActiveRecord
 {
@@ -38,14 +45,16 @@ class Usuarios extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre1, apellido1, username, password, email', 'required'),
-			array('identificacion, id_tipo_identidad', 'numerical', 'integerOnly'=>true),
+			array('nombre1, apellido1,estado_usuario, username, password, email,fecha_creacion', 'required'),
+			array('identificacion, id_tipo_identidad,id_usuario_modificador', 'numerical', 'integerOnly'=>true),
 			array('nombre1', 'length', 'max'=>100),
 			array('nombre2, password', 'length', 'max'=>50),
 			array('apellido1', 'length', 'max'=>40),
 			array('apellido2', 'length', 'max'=>30),
 			array('username', 'length', 'max'=>60),
+                        array('estado_usuario', 'length', 'max'=>8),
 			array('email', 'length', 'max'=>80),
+                        array('fecha_modificacion', 'safe'),
                         array('password2', 'compare', 'compareAttribute' => 'password', 'message'=>'La contraseñas son diferentes'),
 			array('email', 'email', 'message'=>'La dirección de email es incorrecta'),
                         // The following rule is used by search().
@@ -64,6 +73,9 @@ class Usuarios extends CActiveRecord
 		return array(
 			'egresoses' => array(self::HAS_MANY, 'Egresos', 'usuario_id'),
 			'ingresoses' => array(self::HAS_MANY, 'Ingresos', 'usuario_id'),
+                        'idTipoIdentidad' => array(self::BELONGS_TO, 'TipoIdentificacion', 'id_tipo_identidad'),
+                        'idUsuarioModificador' => array(self::BELONGS_TO, 'Usuarios', 'id_usuario_modificador'),
+                        'usuarioses' => array(self::HAS_MANY, 'Usuarios', 'id_usuario_modificador'),
 		);
 	}
 
@@ -84,6 +96,9 @@ class Usuarios extends CActiveRecord
 			'password' => 'Contraseña',
                         'password2' => 'Repetir contraseña',
 			'email' => 'Correo',
+                        'fecha_creacion' => 'Fecha Creacion',
+                        'fecha_modificacion' => 'Fecha Modificacion',
+                        'id_usuario_modificador' => 'Usuario modificador'
 		);
 	}
 
@@ -115,7 +130,7 @@ class Usuarios extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
-
+                $criteria->compare('id_usuario_modificador',$this->id_usuario_modificador,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
