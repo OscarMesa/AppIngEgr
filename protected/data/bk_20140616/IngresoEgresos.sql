@@ -21,25 +21,25 @@ SET time_zone = "+00:00";
 --
 
 DELIMITER $$
---
--- Procedimientos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `gastoXMes`(IN fecha DATE)
+DROP PROCEDURE `gastoXMes`;
+CREATE PROCEDURE `gastoXMes`(IN fecha DATE)
 BEGIN
-SELECT (SELECT aem.total_egreso_mensuale FROM DatamartEgresos.agr_egresos_mensuales aem 
-        INNER JOIN DatamartEgresos.dim_tiempo t ON (t.id_fecha=aem.fecha_egreso) 
+SELECT (SELECT aem.total_egreso_mensuale FROM nettic_DatamartEgresos.agr_egresos_mensuales aem 
+        INNER JOIN nettic_DatamartEgresos.dim_tiempo t ON (t.id_fecha=aem.fecha_egreso) 
         WHERE EXTRACT(YEAR_MONTH FROM t.fecha) = EXTRACT(YEAR_MONTH FROM fecha) LIMIT 1)/COUNT(fac.total_egreso_dia) total
-        FROM DatamartEgresos.fac_egresos_diarios fac 
-                INNER JOIN DatamartEgresos.dim_tiempo t ON (fac.fecha_egreso = t.id_fecha)
+        FROM nettic_DatamartEgresos.fac_egresos_diarios fac 
+                INNER JOIN nettic_DatamartEgresos.dim_tiempo t ON (fac.fecha_egreso = t.id_fecha)
                 WHERE EXTRACT(YEAR_MONTH FROM t.fecha) = EXTRACT(YEAR_MONTH FROM fecha);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_arg_egresos_mensuales`()
+DELIMITER $$
+DROP PROCEDURE `migracion_arg_egresos_mensuales`;
+CREATE PROCEDURE `migracion_arg_egresos_mensuales`()
 BEGIN
     
     DECLARE fecha DATE;
 
-    SELECT MAX( DATE_FORMAT(t.fecha, "%Y-%m" ) ) FROM DatamartEgresos.agr_egresos_mensuales egre JOIN  DatamartEgresos.dim_tiempo t ON (t.id_fecha = egre.fecha_egreso) INTO @fi;
+    SELECT MAX( DATE_FORMAT(t.fecha, "%Y-%m" ) ) FROM nettic_DatamartEgresos.agr_egresos_mensuales egre JOIN  nettic_DatamartEgresos.dim_tiempo t ON (t.id_fecha = egre.fecha_egreso) INTO @fi;
     IF (@fi IS NULL) THEN
         SELECT MIN( DATE_FORMAT(fecha_egreso, "%Y-%m" ) ) FROM IngresoEgresos.egresos INTO @fi;
     ELSE
@@ -48,7 +48,9 @@ BEGIN
    CALL migracion_arg_egresos_mensuales_process(@fi);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_arg_egresos_mensuales_process`(IN fechafi VARCHAR(10))
+DELIMITER $$
+DROP PROCEDURE `migracion_arg_egresos_mensuales_process`;
+CREATE PROCEDURE `migracion_arg_egresos_mensuales_process`(IN fechafi VARCHAR(10))
 BEGIN
    DECLARE id INT;
    DECLARE fecha_id INT;
@@ -64,21 +66,23 @@ BEGIN
     REPEAT
         FETCH c_egresos INTO total,id,f,id_egreso;
 IF NOT done THEN
-        SET fecha_id = (SELECT MAX(id_fecha) FROM DatamartEgresos.dim_tiempo WHERE  DATE_FORMAT(fecha,  '%Y-%m') = DATE_FORMAT( CONCAT(f,'-01'), '%Y-%m' ) LIMIT 1);
-        SET id_tp_egreso = (SELECT MAX(id_tipo_egreso) FROM DatamartEgresos.dim_tipo_egreso WHERE cod_tipo_egreso = id_egreso LIMIT 1);
-        INSERT INTO DatamartEgresos.agr_egresos_mensuales (id_persona,fecha_egreso,id_tipo_egreso,total_egreso_mensuale) VALUE(id,fecha_id,id_tp_egreso,total);
+        SET fecha_id = (SELECT MAX(id_fecha) FROM nettic_DatamartEgresos.dim_tiempo WHERE  DATE_FORMAT(fecha,  '%Y-%m') = DATE_FORMAT( CONCAT(f,'-01'), '%Y-%m' ) LIMIT 1);
+        SET id_tp_egreso = (SELECT MAX(id_tipo_egreso) FROM nettic_DatamartEgresos.dim_tipo_egreso WHERE cod_tipo_egreso = id_egreso LIMIT 1);
+        INSERT INTO nettic_DatamartEgresos.agr_egresos_mensuales (id_persona,fecha_egreso,id_tipo_egreso,total_egreso_mensuale) VALUE(id,fecha_id,id_tp_egreso,total);
 END IF;    
 UNTIL done END REPEAT;   
     CLOSE c_egresos;
     SELECT  fechafi;
     END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_arg_ingresos_mensuales`()
+DELIMITER $$
+-- DROP PROCEDURE `migracion_arg_ingresos_mensuales`;
+CREATE PROCEDURE `migracion_arg_ingresos_mensuales`()
 BEGIN
     
     DECLARE fecha DATE;
 
-    SELECT MAX( DATE_FORMAT(t.fecha, "%Y-%m" ) ) FROM DatamartIngresos.agr_ingresos_mensuales ingre JOIN  DatamartIngresos.dim_tiempo t ON (t.id_fecha = ingre.fecha_ingreso) INTO @fi;
+    SELECT MAX( DATE_FORMAT(t.fecha, "%Y-%m" ) ) FROM nettic_DatamartIngresos.agr_ingresos_mensuales ingre JOIN  nettic_DatamartIngresos.dim_tiempo t ON (t.id_fecha = ingre.fecha_ingreso) INTO @fi;
     IF (@fi IS NULL) THEN
         SELECT MIN( DATE_FORMAT(fecha_ingreso, "%Y-%m" ) ) FROM IngresoEgresos.ingresos INTO @fi;
     ELSE
@@ -87,7 +91,8 @@ BEGIN
    CALL migracion_arg_ingresos_mensuales_process(@fi);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_arg_ingresos_mensuales_process`(IN fechafi VARCHAR(10))
+DELIMITER $$
+CREATE PROCEDURE `migracion_arg_ingresos_mensuales_process`(IN fechafi VARCHAR(10))
 BEGIN
    DECLARE id INT;
    DECLARE fecha_id INT;
@@ -103,16 +108,17 @@ BEGIN
     REPEAT
         FETCH c_ingresos INTO total,id,f,id_ingreso;
 IF NOT done THEN
-        SET fecha_id = (SELECT MAX(id_fecha) FROM DatamartIngresos.dim_tiempo WHERE  DATE_FORMAT(fecha,  '%Y-%m') = DATE_FORMAT( CONCAT(f,'-01'), '%Y-%m' ) LIMIT 1);
-        SET id_tp_ingreso = (SELECT MAX(id_tipo_ingreso) FROM DatamartIngresos.dim_tipo_ingreso WHERE cod_tipo_ingreso = id_ingreso LIMIT 1);
-        INSERT INTO DatamartIngresos.agr_ingresos_mensuales (id_persona,fecha_ingreso,id_tipo_ingreso,total_ingreso_mensuale) VALUE(id,fecha_id,id_tp_ingreso,total);
+        SET fecha_id = (SELECT MAX(id_fecha) FROM nettic_DatamartIngresos.dim_tiempo WHERE  DATE_FORMAT(fecha,  '%Y-%m') = DATE_FORMAT( CONCAT(f,'-01'), '%Y-%m' ) LIMIT 1);
+        SET id_tp_ingreso = (SELECT MAX(id_tipo_ingreso) FROM nettic_DatamartIngresos.dim_tipo_ingreso WHERE cod_tipo_ingreso = id_ingreso LIMIT 1);
+        INSERT INTO nettic_DatamartIngresos.agr_ingresos_mensuales (id_persona,fecha_ingreso,id_tipo_ingreso,total_ingreso_mensuale) VALUE(id,fecha_id,id_tp_ingreso,total);
 END IF;    
 UNTIL done END REPEAT;   
     CLOSE c_ingresos;
     SELECT  fechafi;
     END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_dim_personas`()
+DELIMITER $$
+CREATE PROCEDURE `migracion_dim_personas`()
 BEGIN
     DECLARE count INT DEFAULT 2;
     DECLARE id INT;
@@ -135,7 +141,8 @@ BEGIN
     SELECT count;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_dim_personas_egresos`()
+DELIMITER $$
+CREATE PROCEDURE `migracion_dim_personas_egresos`()
 BEGIN
     DECLARE count INT DEFAULT 2;
     DECLARE id INT;
@@ -158,11 +165,11 @@ BEGIN
     REPEAT
         FETCH c_personas INTO id,nombre1,nombre2,apellido1,apellido2,tipo_identificacion,fecha_creacion,fecha_modificacion,um_nombre1,um_apellido1;
             IF NOT done THEN
-                SET count = (SELECT COUNT(DIDP.id_persona) FROM DatamartEgresos.dim_persona DIDP WHERE DIDP.id_persona = id);
+                SET count = (SELECT COUNT(DIDP.id_persona) FROM nettic_DatamartEgresos.dim_persona DIDP WHERE DIDP.id_persona = id);
                 IF count = 0 THEN
-                    INSERT INTO DatamartEgresos.dim_persona (id_persona,tipo_identificacion,nombre_completo,fecha_creacion,fecha_modificacion,usuario_modificador) VALUE(id,tipo_identificacion,CONCAT(nombre1,' ',nombre2,' ',apellido1,' ',apellido2),fecha_creacion,fecha_modificacion,CONCAT(um_nombre1,' ',um_apellido1));
+                    INSERT INTO nettic_DatamartEgresos.dim_persona (id_persona,tipo_identificacion,nombre_completo,fecha_creacion,fecha_modificacion,usuario_modificador) VALUE(id,tipo_identificacion,CONCAT(nombre1,' ',nombre2,' ',apellido1,' ',apellido2),fecha_creacion,fecha_modificacion,CONCAT(um_nombre1,' ',um_apellido1));
                 ELSE
-                    UPDATE DatamartEgresos.dim_persona SET tipo_identificacion=tipo_identificacion,nombre_completo=CONCAT(nombre1,' ',nombre2,' ',apellido1,' ',apellido2),fecha_creacion=fecha_creacion,fecha_modificacion=fecha_modificacion,usuario_modificador=CONCAT(um_nombre1,' ',um_apellido1)  WHERE id_persona =id;
+                    UPDATE nettic_DatamartEgresos.dim_persona SET tipo_identificacion=tipo_identificacion,nombre_completo=CONCAT(nombre1,' ',nombre2,' ',apellido1,' ',apellido2),fecha_creacion=fecha_creacion,fecha_modificacion=fecha_modificacion,usuario_modificador=CONCAT(um_nombre1,' ',um_apellido1)  WHERE id_persona =id;
                 END IF;
             END IF;
     UNTIL done END REPEAT;
@@ -170,13 +177,14 @@ BEGIN
 --     SELECT count;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_dim_tiempo`()
+DELIMITER $$
+CREATE PROCEDURE `migracion_dim_tiempo`()
 BEGIN
 
 
-    -- delete from DatamartIngresos.dim_tiempo;
+    -- delete from nettic_DatamartIngresos.dim_tiempo;
     -- menor 
-    SELECT MAX( fecha ) FROM DatamartIngresos.dim_tiempo INTO @fi;
+    SELECT MAX( fecha ) FROM nettic_DatamartIngresos.dim_tiempo INTO @fi;
     IF (@fi IS NULL) THEN
         SELECT MIN( fecha_ingreso ) FROM IngresoEgresos.ingresos INTO @fi;
      END IF; 
@@ -186,7 +194,7 @@ BEGIN
     --  
     while (@fi <= @ff) DO 
       
-    INSERT INTO DatamartIngresos.dim_tiempo
+    INSERT INTO nettic_DatamartIngresos.dim_tiempo
         (
             fecha,
             dia,
@@ -216,11 +224,12 @@ BEGIN
 
     END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_dim_tiempo_egresos`()
+DELIMITER $$
+CREATE PROCEDURE `migracion_dim_tiempo_egresos`()
 BEGIN
 
     -- menor 
-    SELECT MAX( fecha ) FROM DatamartEgresos.dim_tiempo INTO @fi;
+    SELECT MAX( fecha ) FROM nettic_DatamartEgresos.dim_tiempo INTO @fi;
     IF (@fi IS NULL) THEN
         SELECT MIN( fecha_egreso ) FROM IngresoEgresos.egresos INTO @fi;
      END IF; 
@@ -230,7 +239,7 @@ BEGIN
     --  
     while (@fi <= @ff) DO 
       
-    INSERT INTO DatamartEgresos.dim_tiempo
+    INSERT INTO nettic_DatamartEgresos.dim_tiempo
         (
             fecha,
             dia,
@@ -258,7 +267,7 @@ BEGIN
 
     END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_dim_tipo_egreso`()
+CREATE  PROCEDURE `migracion_dim_tipo_egreso`()
 BEGIN
     DECLARE count INT DEFAULT 2;
     DECLARE id INT;
@@ -273,18 +282,18 @@ BEGIN
     REPEAT
         FETCH c_tp_egreso INTO id, tipo_egreso;
             IF NOT done THEN
-                SET count = (SELECT COUNT(DITI.cod_tipo_egreso) FROM DatamartEgresos.dim_tipo_egreso DITI WHERE DITI.cod_tipo_egreso = id);
+                SET count = (SELECT COUNT(DITI.cod_tipo_egreso) FROM nettic_DatamartEgresos.dim_tipo_egreso DITI WHERE DITI.cod_tipo_egreso = id);
                 IF  count = 0 THEN  
-                    INSERT INTO DatamartEgresos.dim_tipo_egreso (cod_tipo_egreso,tipo_egreso) VALUE(id,tipo_egreso);
+                    INSERT INTO nettic_DatamartEgresos.dim_tipo_egreso (cod_tipo_egreso,tipo_egreso) VALUE(id,tipo_egreso);
                 ELSE
-                    UPDATE DatamartEgresos.dim_tipo_egreso SET tipo_egreso = tipo_egreso WHERE cod_tipo_egreso = id;
+                    UPDATE nettic_DatamartEgresos.dim_tipo_egreso SET tipo_egreso = tipo_egreso WHERE cod_tipo_egreso = id;
                 END IF;     
             END IF;
     UNTIL done END REPEAT;
     CLOSE c_tp_egreso;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_dim_tipo_ingreso`()
+CREATE PROCEDURE `migracion_dim_tipo_ingreso`()
 BEGIN
     DECLARE count INT DEFAULT 2;
     DECLARE id INT;
@@ -299,23 +308,23 @@ BEGIN
     REPEAT
         FETCH c_tp_ingreso INTO id, tipo_ingreso;
             IF NOT done THEN
-                SET count = (SELECT COUNT(DITI.cod_tipo_ingreso) FROM DatamartIngresos.dim_tipo_ingreso DITI WHERE DITI.cod_tipo_ingreso = id);
+                SET count = (SELECT COUNT(DITI.cod_tipo_ingreso) FROM nettic_DatamartIngresos.dim_tipo_ingreso DITI WHERE DITI.cod_tipo_ingreso = id);
                 IF  count = 0 THEN  
-                    INSERT INTO DatamartIngresos.dim_tipo_ingreso (cod_tipo_ingreso,tipo_ingreso) VALUE(id,tipo_ingreso);
+                    INSERT INTO nettic_DatamartIngresos.dim_tipo_ingreso (cod_tipo_ingreso,tipo_ingreso) VALUE(id,tipo_ingreso);
                 ELSE
-                    UPDATE DatamartIngresos.dim_tipo_ingreso SET tipo_ingreso = tipo_ingreso WHERE cod_tipo_ingreso = id;
+                    UPDATE nettic_DatamartIngresos.dim_tipo_ingreso SET tipo_ingreso = tipo_ingreso WHERE cod_tipo_ingreso = id;
                 END IF;     
             END IF;
     UNTIL done END REPEAT;
     CLOSE c_tp_ingreso;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_fac_egresos_diarios`()
+CREATE PROCEDURE `migracion_fac_egresos_diarios`()
 BEGIN
     
     DECLARE fecha DATE;
 
-    SELECT MAX( t.fecha ) FROM DatamartEgresos.fac_egresos_diarios egre JOIN  DatamartEgresos.dim_tiempo t ON (t.id_fecha = egre.fecha_egreso) INTO @fi;
+    SELECT MAX( t.fecha ) FROM nettic_DatamartEgresos.fac_egresos_diarios egre JOIN  nettic_DatamartEgresos.dim_tiempo t ON (t.id_fecha = egre.fecha_egreso) INTO @fi;
     IF (@fi IS NULL) THEN
         SELECT MIN( fecha_egreso ) FROM IngresoEgresos.egresos INTO @fi;
     ELSE
@@ -325,7 +334,7 @@ BEGIN
     SELECT @fi;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_fac_egresos_diarios_process`(IN fechafi DATE)
+CREATE PROCEDURE `migracion_fac_egresos_diarios_process`(IN fechafi DATE)
 BEGIN
    DECLARE id INT;
    DECLARE fecha_id INT;
@@ -341,21 +350,21 @@ BEGIN
     REPEAT
         FETCH c_egresos INTO total,id,f,id_egreso;
     IF NOT done THEN
-        SET fecha_id = (SELECT MAX(id_fecha) FROM DatamartEgresos.dim_tiempo WHERE `fecha` = f LIMIT 1);
-        SET id_tp_egreso = (SELECT MAX(id_tipo_egreso) FROM DatamartEgresos.dim_tipo_egreso WHERE cod_tipo_egreso = id_egreso LIMIT 1);
-        INSERT INTO DatamartEgresos.fac_egresos_diarios (id_persona,fecha_egreso,id_tipo_egreso,total_egreso_dia) VALUE(id,fecha_id,id_tp_egreso,total);
+        SET fecha_id = (SELECT MAX(id_fecha) FROM nettic_DatamartEgresos.dim_tiempo WHERE `fecha` = f LIMIT 1);
+        SET id_tp_egreso = (SELECT MAX(id_tipo_egreso) FROM nettic_DatamartEgresos.dim_tipo_egreso WHERE cod_tipo_egreso = id_egreso LIMIT 1);
+        INSERT INTO nettic_DatamartEgresos.fac_egresos_diarios (id_persona,fecha_egreso,id_tipo_egreso,total_egreso_dia) VALUE(id,fecha_id,id_tp_egreso,total);
     END IF;    
     UNTIL done END REPEAT;   
     CLOSE c_egresos;
     SELECT  fechafi;
     END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_fac_ingresos_diarios`()
+CREATE PROCEDURE `migracion_fac_ingresos_diarios`()
 BEGIN
     
     DECLARE fecha DATE;
 
-    SELECT MAX( t.fecha ) FROM DatamartIngresos.fac_ingresos_diarios ingre JOIN  DatamartIngresos.dim_tiempo t ON (t.id_fecha = ingre.fecha_ingreso) INTO @fi;
+    SELECT MAX( t.fecha ) FROM nettic_DatamartIngresos.fac_ingresos_diarios ingre JOIN  nettic_DatamartIngresos.dim_tiempo t ON (t.id_fecha = ingre.fecha_ingreso) INTO @fi;
     IF (@fi IS NULL) THEN
         SELECT MIN( fecha_ingreso ) FROM IngresoEgresos.ingresos INTO @fi;
     ELSE
@@ -364,7 +373,7 @@ BEGIN
    CALL migracion_fac_ingresos_diarios_process(@fi);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `migracion_fac_ingresos_diarios_process`(IN fechafi DATE)
+CREATE PROCEDURE `migracion_fac_ingresos_diarios_process`(IN fechafi DATE)
 BEGIN
    DECLARE id INT;
    DECLARE fecha_id INT;
@@ -380,24 +389,24 @@ BEGIN
     REPEAT
         FETCH c_ingresos INTO total,id,f,id_ingreso;
         IF NOT done THEN
-        SET fecha_id = (SELECT MAX(id_fecha) FROM DatamartIngresos.dim_tiempo WHERE `fecha` = f LIMIT 1);
-        SET id_tp_ingreso = (SELECT MAX(id_tipo_ingreso) FROM DatamartIngresos.dim_tipo_ingreso WHERE cod_tipo_ingreso = id_ingreso LIMIT 1);
-        INSERT INTO DatamartIngresos.fac_ingresos_diarios (id_persona,fecha_ingreso,id_tipo_ingreso,total_ingreso_dia) VALUE(id,fecha_id,id_tp_ingreso,total);
+        SET fecha_id = (SELECT MAX(id_fecha) FROM nettic_DatamartIngresos.dim_tiempo WHERE `fecha` = f LIMIT 1);
+        SET id_tp_ingreso = (SELECT MAX(id_tipo_ingreso) FROM nettic_DatamartIngresos.dim_tipo_ingreso WHERE cod_tipo_ingreso = id_ingreso LIMIT 1);
+        INSERT INTO nettic_DatamartIngresos.fac_ingresos_diarios (id_persona,fecha_ingreso,id_tipo_ingreso,total_ingreso_dia) VALUE(id,fecha_id,id_tp_ingreso,total);
         END IF;
 UNTIL done END REPEAT;   
     CLOSE c_ingresos;
     SELECT  fechafi;
     END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `saldoDiasHabiles`()
+CREATE PROCEDURE `saldoDiasHabiles`()
 BEGIN
 DECLARE done INT DEFAULT 0;
 DECLARE dia INT;
 DECLARE c_dias_habiles INT DEFAULT 0;
 DECLARE total_dia DOUBLE;
 DECLARE total DOUBLE DEFAULT 0;
-DECLARE c_ingresos CURSOR FOR SELECT fac.total_egreso_dia,t.dia_semana FROM DatamartEgresos.fac_egresos_diarios fac 
-                INNER JOIN DatamartEgresos.dim_tiempo t ON (fac.fecha_egreso = t.id_fecha);
+DECLARE c_ingresos CURSOR FOR SELECT fac.total_egreso_dia,t.dia_semana FROM nettic_DatamartEgresos.fac_egresos_diarios fac 
+                INNER JOIN nettic_DatamartEgresos.dim_tiempo t ON (fac.fecha_egreso = t.id_fecha);
 DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
 
 OPEN c_ingresos;

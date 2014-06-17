@@ -28,7 +28,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'usuario_id'); ?>
-		<?php echo $form->dropDownList($model,'usuario_id',  CHtml::listData(Usuarios::model()->findAll(),'id','nombre'), array('empty'=>'- Seleccione -')); ?>
+		<?php echo $form->dropDownList($model,'usuario_id',  CHtml::listData(Usuarios::model()->findAll(),'id','nombre1'), array('empty'=>'- Seleccione -')); ?>
 	</div>
 
 	<div class="row">
